@@ -1,0 +1,32 @@
+@import '~normalize.css';
+@import './fonts/index.scss';
+@import './root.scss';
+
+body {
+  font-family: Roboto, sans-serif;
+  background-color: var(--app-bg);
+}
+
+.app {}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  width: var(--drawer-width);
+  background-color: var(--drawer-bg);
+}
+
+.drawer__container {
+  padding: 10px;
+}
+
+.main-content {
+  margin-left: var(--drawer-width);
+}
+
+.main-content__container {
+  padding: 10px;
+}
