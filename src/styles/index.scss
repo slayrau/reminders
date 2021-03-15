@@ -1,8 +1,16 @@
 @import '~normalize.css';
 @import './fonts/index.scss';
+@import './utils/system-color.scss';
 @import './root.scss';
 
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 body {
+  font-size: var(--font-size-body);
   font-family: Roboto, sans-serif;
   background-color: var(--app-bg);
 }
@@ -21,6 +29,19 @@ body {
 
 .drawer__container {
   padding: 10px;
+  height: 100%;
+}
+
+.drawer__body {
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-rows: auto auto 1fr;
+  row-gap: 10px;
+  height: 100%;
+}
+
+.drawer .user-lists {
+  overflow: hidden;
 }
 
 .main-content {

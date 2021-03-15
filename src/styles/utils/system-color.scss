@@ -1,0 +1,49 @@
+.system-color {
+  &--red {
+    color: var(--system-red);
+  }
+  
+  &--orange {
+    color: var(--system-orange);
+  }
+  
+  &--yellow {
+    color: var(--system-yellow);
+  }
+  
+  &--green {
+    color: var(--system-green);
+  }
+  
+  &--teal {
+    color: var(--system-teal);
+  }
+  
+  &--blue {
+    color: var(--system-blue);
+  }
+  
+  &--indigo {
+    color: var(--system-indigo);
+  }
+  
+  &--coral {
+    color: var(--system-coral);
+  }
+  
+  &--purple {
+    color: var(--system-purple);
+  }
+  
+  &--brown {
+    color: var(--system-brown);
+  }
+  
+  &--gray {
+    color: var(--system-gray);
+  }
+  
+  &--pink {
+    color: var(--system-pink);
+  }
+}
