@@ -1,0 +1,44 @@
+@import '/src/styles/utils/extends.scss';
+
+.user-item {}
+
+.user-item__link {
+  display: block;
+  padding: 0 10px;
+  font-size: var(--font-size-caption);
+  text-decoration: none;
+  border-radius: 4px;
+
+  &--active {
+    background-color: currentColor;
+
+    .user-item__icon,
+    .user-item__title,
+    .user-item__count {
+      color: #fff;
+    }
+  }
+}
+
+.user-item__body {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 10px;
+  align-items: center;
+}
+
+.user-item__icon {
+  display: block;
+  width: var(--button-size);
+  height: var(--button-size);
+  background-color: currentColor;
+  border-radius: 50%;
+}
+
+.user-item__title {
+  @extend .text-ellipsis;
+
+}
+
+.user-item__count {}

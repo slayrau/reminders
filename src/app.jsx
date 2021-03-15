@@ -1,5 +1,6 @@
 import Search from 'src/components/search';
 import Filters from 'src/components/filters';
+import UserLists from 'src/components/user-lists';
 import 'src/styles/index.scss';
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
           <div className="drawer__body">
             <Search />
             <Filters />
+            <UserLists />
           </div>
         </div>
       </div>

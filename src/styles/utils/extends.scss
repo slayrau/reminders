@@ -16,3 +16,9 @@
   border: none;
   background-color: transparent;
 }
+
+.text-ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
