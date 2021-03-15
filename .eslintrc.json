@@ -1,0 +1,56 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "react-app",
+    "airbnb",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "."
+        ]
+      }
+    }
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "comma-dangle": "warn",
+    "arrow-body-style": "off",
+    "jsx-a11y/no-autofocus": "off",
+    "no-unused-vars": "warn",
+    "object-curly-newline": "off",
+    "padded-blocks": "off",
+    "semi": "warn",
+    "no-trailing-spaces": "warn",
+    "no-multiple-empty-lines": "warn",
+    "no-param-reassign": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-array-index-key": "off",
+    "consistent-return": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "camelcase": "off",
+    "max-len": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "react/jsx-filename-extension": "off",
+    "import/prefer-default-export": "off"
+  }
+}
