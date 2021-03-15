@@ -1,3 +1,4 @@
+import Search from 'src/components/search';
 import 'src/styles/index.scss';
 
 const App = () => {
@@ -5,7 +6,9 @@ const App = () => {
     <div className="app">
       <div className="drawer">
         <div className="drawer__container">
-          drawer
+          <div className="drawer__body">
+            <Search />
+          </div>
         </div>
       </div>
 

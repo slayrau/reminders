@@ -1,0 +1,36 @@
+@import 'src/styles/utils/extends.scss';
+
+.search {
+  position: relative;
+}
+
+.search__label {
+  width: 100%;
+}
+
+.search__input {
+  @extend .reset-input;
+
+  width: 100%;
+  height: 28px;
+  padding-left: var(--button-size);
+  padding-right: var(--button-size);
+
+  background-color: #dcdcdc;
+  border-radius: 6px;
+}
+
+.search__clear-button {
+  @extend .reset-button;
+
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: var(--button-size);
+  height: var(--button-size);
+  background-color: var(--label-color-primary);
+  border-radius: 50%;
+  cursor: pointer;
+}

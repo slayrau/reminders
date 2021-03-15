@@ -2,7 +2,14 @@
 @import './fonts/index.scss';
 @import './root.scss';
 
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 body {
+  font-size: var(--font-size-body);
   font-family: Roboto, sans-serif;
   background-color: var(--app-bg);
 }
@@ -21,6 +28,12 @@ body {
 
 .drawer__container {
   padding: 10px;
+}
+
+.drawer__body {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 10px;
 }
 
 .main-content {
