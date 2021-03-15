@@ -1,4 +1,5 @@
 import Search from 'src/components/search';
+import Filters from 'src/components/filters';
 import 'src/styles/index.scss';
 
 const App = () => {
@@ -8,6 +9,7 @@ const App = () => {
         <div className="drawer__container">
           <div className="drawer__body">
             <Search />
+            <Filters />
           </div>
         </div>
       </div>
