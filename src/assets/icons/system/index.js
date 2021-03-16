@@ -11,6 +11,7 @@ import { ReactComponent as PlusCircleOutline } from './plus-circle-outline.svg';
 
 // S
 import { ReactComponent as Search } from './search.svg';
+import { ReactComponent as SignOut } from './sign-out.svg';
 
 // T
 import { ReactComponent as Today } from './today.svg';
@@ -25,6 +26,9 @@ const SystemIconTypes = {
 
   // F
   [SystemIconNames.flag]: Flag,
+
+  // L
+  [SystemIconNames.signOut]: SignOut,
 
   // P
   [SystemIconNames.plusCircleOutline]: PlusCircleOutline,

@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import { NavLink, useRouteMatch } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import PropTypes from 'prop-types';
 
 import { AuthPageTypes } from 'src/utils/const';
 import authBackgroundImg from 'src/assets/images/auth-background.jpg';
@@ -8,12 +10,19 @@ import authBackgroundImg from 'src/assets/images/auth-background.jpg';
 import AuthInput from './components/auth-input';
 import './style.scss';
 
-const AuthPage = () => {
+const AuthPage = ({ onSignIn, onSignUp }) => {
   const match = useRouteMatch('/:type');
   const authType = match.params.type;
 
-  document.documentElement.style.backgroundImage = `url(${authBackgroundImg})`;
-  document.body.style.backdropFilter = 'blur(50px)';
+  useEffect(() => {
+    document.documentElement.style.backgroundImage = `url(${authBackgroundImg})`;
+    document.body.style.backdropFilter = 'blur(50px)';
+
+    return () => {
+      document.documentElement.style.backgroundImage = '';
+      document.body.style.backdropFilter = '';
+    };
+  }, []);
 
   return (
     <Formik
@@ -25,10 +34,16 @@ const AuthPage = () => {
       validationSchema={Yup.object({
         email: Yup.string().email('Invalid email').required('Email is required'),
         password: Yup.string().min(6, 'Password is to short. Min length 6 symbols').required('Password is required'),
-        confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Password must match').required('Password must match'),
+        confirmPassword: authType === AuthPageTypes.signUp && Yup.string().oneOf([Yup.ref('password'), null], 'Password must match').required('Password must match'),
       })}
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={({ email, password }) => {
+        if (authType === AuthPageTypes.signIn) {
+          onSignIn(email, password);
+        }
+
+        if (authType === AuthPageTypes.signUp) {
+          onSignUp(email, password);
+        }
       }}
     >
       {({ errors, touched, resetForm }) => (
@@ -136,6 +151,11 @@ const AuthPage = () => {
       )}
     </Formik>
   );
+};
+
+AuthPage.propTypes = {
+  onSignIn: PropTypes.func.isRequired,
+  onSignUp: PropTypes.func.isRequired,
 };
 
 export default AuthPage;
