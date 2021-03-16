@@ -2,37 +2,27 @@
 
 .filters-item__link {
   display: block;
-  padding: 8px;
-
+  padding: 10px;
   color: var(--label-color-secondary);
   text-decoration: none;
   background-color: #d2d2d2;
   border-radius: 10px;
 
-  &--today {
-    color: var(--system-blue);
-  }
-  
-  &--planned {
-    color: var(--system-red);
-  }
-
-  &--all {
-    color: var(--system-gray);
-  }
-
-  &--flagged {
-    color: var(--system-orange);
-  }
-
   &--active {
-    .filters-item__icon,
+    background-color: currentColor;
+
     .filters-item__title,
     .filters-item__count {
       color: #fff;
     }
 
-    background-color: currentColor;
+    .filters-item__icon-wrapper {
+      background-color: #fff;
+    }
+
+    .filters-item__icon {
+      color: currentColor;
+    }
   }
 }
 
@@ -40,21 +30,26 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+}
+
+.filters-item__icon-wrapper {
+  background-color: currentColor;
+  border-radius: 50%;
 }
 
 .filters-item__icon {
   display: block;
   width: 24px;
   height: 24px;
-  background-color: currentColor;
-  border-radius: 50%;
+  color: #fff;
 }
 
 .filters-item__title {
   margin: 0;
   margin-top: 10px;
   color: var(--label-color-secondary);
-  font-size: var(--font-size-caption);
+  font-size: var(--font-size-body);
 }
 
 .filters-item__count {
@@ -65,5 +60,5 @@
   color: var(--label-color-secondary);
   font-weight: bold;
 
-  font-size: var(--font-size-4);
+  font-size: var(--font-size-title-3);
 }

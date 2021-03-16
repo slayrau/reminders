@@ -1,5 +1,8 @@
 import lists from 'src/mocks/user-lists';
 
+import { SystemIconNames } from 'src/utils/const';
+import Icon from 'src/components/icon';
+
 import UserItem from './user-item';
 import './style.scss';
 
@@ -16,6 +19,7 @@ const UserLists = () => {
               id={list.id}
               title={list.title}
               color={list.color}
+              icon={list.icon}
               itemsCount={list.itemsCount}
             />
           ))}
@@ -25,7 +29,7 @@ const UserLists = () => {
           className="user-list__new-list-button"
           type="button"
         >
-          <span className="icon" />
+          <Icon className="user-list__new-list-icon" icon={SystemIconNames.plusCircleOutline} />
           Add new list
         </button>
       </div>
