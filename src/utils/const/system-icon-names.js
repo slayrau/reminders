@@ -10,6 +10,7 @@ const IconNameTypes = {
 
   // S
   search: 'search',
+  signOut: 'signOut',
 
   // T
   today: 'today',
