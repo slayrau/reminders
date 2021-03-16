@@ -9,10 +9,21 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
 body {
   font-size: var(--font-size-body);
   font-family: Roboto, sans-serif;
-  background-color: var(--app-bg);
 }
 
 .app {}

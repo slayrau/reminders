@@ -1,0 +1,46 @@
+@import 'src/styles/utils/extends.scss';
+
+.auth-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-input__label-text {
+  min-width: 140px;
+  margin-right: 10px;
+}
+
+.auth-input__input {
+  @extend .reset-input;
+
+  flex: 1;
+  height: calc(var(--button-size) * 2);
+  padding: 0 10px;
+  outline: none;
+  text-align: center;
+  background-color: #f6f5fb;
+  border: 1px solid transparent;
+
+  .auth-input:first-child & {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .auth-input:last-child & {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .auth-input:not(:last-child) & {
+    border-bottom: 1px solid rgba(#000, 0.1);
+  }
+
+  .auth-input--error & {
+    border-color: red !important;
+  }
+
+  .auth-input--error + .auth-input--error & {
+    border-top: transparent;
+  }
+}
