@@ -11,6 +11,8 @@ const Filters = () => (
           key={filter.id}
           id={filter.id}
           title={filter.title}
+          color={filter.color}
+          icon={filter.icon}
         />
       ))}
     </ul>

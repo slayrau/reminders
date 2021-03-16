@@ -4,18 +4,25 @@
 
 .user-item__link {
   display: block;
-  padding: 0 10px;
-  font-size: var(--font-size-caption);
+  padding: 6px 10px;
+  font-size: var(--font-size-body);
   text-decoration: none;
   border-radius: 4px;
 
   &--active {
     background-color: currentColor;
 
-    .user-item__icon,
     .user-item__title,
     .user-item__count {
       color: #fff;
+    }
+
+    .user-item__icon-wrapper {
+      background-color: #fff;
+    }
+
+    .user-item__icon {
+      color: currentColor;
     }
   }
 }
@@ -28,17 +35,26 @@
   align-items: center;
 }
 
+.user-item__icon-wrapper {
+  background-color: currentColor;
+  border-radius: 50%;
+}
+
 .user-item__icon {
   display: block;
   width: var(--button-size);
   height: var(--button-size);
-  background-color: currentColor;
-  border-radius: 50%;
+  color: #fff;
 }
 
 .user-item__title {
   @extend .text-ellipsis;
 
+  margin: 0;
+  color: var(--label-color-secondary);
 }
 
-.user-item__count {}
+.user-item__count { 
+  margin: 0;
+  color: var(--label-color-tertiary);
+}

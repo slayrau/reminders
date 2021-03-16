@@ -1,7 +1,22 @@
 @import 'src/styles/utils/extends.scss';
 
+$icon-width: calc(var(--button-size) + 6px);
+
 .search {
   position: relative;
+}
+
+.search__icon {
+  width: $icon-width;
+  height: var(--button-size);
+
+  &--search {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
 }
 
 .search__label {
@@ -13,11 +28,16 @@
 
   width: 100%;
   height: 28px;
-  padding-left: var(--button-size);
-  padding-right: var(--button-size);
+  padding: 0 $icon-width;
 
+  color: var(--label-color-secondary);
+  font-size: var(--font-size-body);
   background-color: #dcdcdc;
   border-radius: 6px;
+
+  &::placeholder {
+    color: var(--label-color-tertiary)
+  }
 }
 
 .search__clear-button {
@@ -28,9 +48,10 @@
   top: 50%;
   transform: translateY(-50%);
 
-  width: var(--button-size);
+  display: flex;
+
+  width: $icon-width;
   height: var(--button-size);
-  background-color: var(--label-color-primary);
   border-radius: 50%;
   cursor: pointer;
 }

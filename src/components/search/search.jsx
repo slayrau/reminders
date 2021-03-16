@@ -1,4 +1,7 @@
 import { useState } from 'react';
+
+import { SystemIconNames } from 'src/utils/const';
+import Icon from 'src/components/icon';
 import './style.scss';
 
 const Search = () => {
@@ -15,6 +18,7 @@ const Search = () => {
   return (
     <div className="search">
       <label htmlFor="search__label" aria-label="Search reminders">
+        <Icon className="search__icon search__icon--search" icon={SystemIconNames.search} />
         <input
           className="search__input"
           type="text"
@@ -33,7 +37,9 @@ const Search = () => {
           type="button"
           onClick={handleClearClick}
           aria-label="Clear search"
-        />
+        >
+          <Icon className="search__icon search__icon--xmark" icon={SystemIconNames.xmarkCircleFilled} />
+        </button>
       )}
     </div>
   );

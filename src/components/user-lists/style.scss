@@ -16,7 +16,7 @@
 .user-lists__title {
   margin: 0;
   margin-left: 10px;
-  color: var(--label-color-secondary);
+  color: var(--label-color-tertiary);
   font-size: var(--font-size-caption);
   font-weight: normal
 }
@@ -37,20 +37,17 @@
 
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 6px 10px;
 
   color: var(--label-color-secondary);
-  font-size: var(--font-size-caption);
+  font-size: var(--font-size-body);
   text-align: left;
   cursor: pointer;
+}
 
-  .icon {
-    display: block;
-    width: var(--button-size);
-    height: var(--button-size);
-    margin-right: 10px;
-
-    border-radius: 50%;
-    background-color: var(--label-color-secondary);
-  }
+.user-list__new-list-icon {
+  display: block;
+  width: var(--button-size);
+  height: var(--button-size);
+  margin-right: 10px;
 }
