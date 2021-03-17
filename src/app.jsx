@@ -1,32 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import AuthApi from 'src/api/auth';
 import { AuthPageTypes } from 'src/utils/const';
+import Operation from 'src/redux/operations/auth';
+import Selector from 'src/redux/selectors/auth';
 
 import AuthPage from 'src/pages/auth-page';
 import MainPage from 'src/pages/main-page';
 import 'src/styles/index.scss';
 
 const App = () => {
-  const [user, setUser] = useState();
-
-  const handleSignIn = (email, password) => {
-    AuthApi.signIn(email, password);
-  };
-
-  const handleSignUp = (email, password) => {
-    AuthApi.signUp(email, password);
-  };
-
-  const handleSignOut = () => {
-    AuthApi.signOut();
-  };
+  const dispatch = useDispatch();
+  const user = useSelector(Selector.user);
 
   useEffect(() => {
-    AuthApi.onAuthStateChanged((authUser) => {
-      setUser(authUser);
-    });
+    dispatch(Operation.checkUserSigned());
   }, []);
 
   return (
@@ -36,12 +25,7 @@ const App = () => {
           <>
             <Route
               path={[`/${AuthPageTypes.signIn}`, `/${AuthPageTypes.signUp}`]}
-              component={() => (
-                <AuthPage
-                  onSignIn={handleSignIn}
-                  onSignUp={handleSignUp}
-                />
-              )}
+              component={AuthPage}
             />
 
             <Redirect to={`/${AuthPageTypes.signIn}`} />
@@ -49,14 +33,8 @@ const App = () => {
         ) : (
           <>
             <Route
-              exact
               path="/"
-              render={() => (
-                <MainPage
-                  user={user}
-                  onSignOut={handleSignOut}
-                />
-              )}
+              component={MainPage}
             />
 
             <Redirect to="/" />

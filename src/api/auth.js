@@ -12,13 +12,13 @@ const signOut = () => (
   auth.signOut()
 );
 
-const onAuthStateChanged = (callback) => (
-  auth.onAuthStateChanged(callback)
+const checkUserSigned = () => (
+  auth.getRedirectResult().then(() => auth.currentUser)
 );
 
 export default {
   signIn,
   signUp,
   signOut,
-  onAuthStateChanged,
+  checkUserSigned,
 };
