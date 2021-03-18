@@ -8,6 +8,9 @@ import Selector from 'src/redux/selectors/auth';
 
 import AuthPage from 'src/pages/auth-page';
 import MainPage from 'src/pages/main-page';
+
+import Drawer from 'src/modules/drawer';
+import ListProperties from 'src/modules/list-properties';
 import 'src/styles/index.scss';
 
 const App = () => {
@@ -32,12 +35,16 @@ const App = () => {
           </>
         ) : (
           <>
+            <Drawer />
+
             <Route
               path="/"
               component={MainPage}
             />
 
             <Redirect to="/" />
+
+            <ListProperties />
           </>
         )}
     </Switch>
