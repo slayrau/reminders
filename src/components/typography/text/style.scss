@@ -1,0 +1,13 @@
+.text {
+  margin: 0;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+
+  &--weight-regular {
+    font-weight: 400;
+  }
+
+  &--weight-bold {
+    font-weight: bold;
+  }
+}

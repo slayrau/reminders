@@ -10,6 +10,11 @@ import authBackgroundImg from 'src/assets/images/auth-background.jpg';
 import Operation from 'src/redux/operations/auth';
 import Selector from 'src/redux/selectors/auth';
 
+import Modal from 'src/components/modal';
+import Title from 'src/components/typography/title';
+import Text from 'src/components/typography/text';
+import Button from 'src/components/button';
+
 import AuthInput from './components/auth-input';
 import './style.scss';
 
@@ -18,6 +23,8 @@ const AuthPage = () => {
   const loading = useSelector(Selector.loading);
   const match = useRouteMatch('/:type');
   const authType = match.params.type;
+  const isSignUpType = authType === AuthPageTypes.signUp;
+  const isSignInType = authType === AuthPageTypes.signIn;
 
   const handleSubmit = ({ email, password }) => {
     if (authType === AuthPageTypes.signIn) dispatch(Operation.signIn(email, password));
@@ -47,109 +54,107 @@ const AuthPage = () => {
         confirmPassword: authType === AuthPageTypes.signUp && Yup.string().oneOf([Yup.ref('password'), null]).required('Password must match'),
       })}
       onSubmit={handleSubmit}
+      validateOnBlur={false}
+      validateOnChange={false}
     >
       {({ errors, touched, resetForm }) => (
         <main className="auth-page">
-          <div className="auth-page__container">
-            <div className="auth-page__body">
 
-              <section className="auth-page__auth-modal auth-modal">
-                <div className="auth-modal__header">
-                  <h1 className="auth-modal__page-title">Reminders</h1>
-                  <p className="auth-modal__description">
-                    {authType === AuthPageTypes.signIn && 'Sign in with your email and password.'}
-                    {authType === AuthPageTypes.signUp && 'Create account.'}
-                  </p>
-                </div>
+          <Modal>
+            <Form className="auth-page__form">
+              <div className="auth-page__form-header">
+                <Title level="1" weight="bold">Reminders</Title>
+                {isSignInType && <Text>Sign in with your email and password.</Text>}
+                {isSignUpType && <Text>Create an account to use Reminders.</Text>}
+              </div>
 
-                <Form className="auth-modal__form">
-                  <div className="auth-modal__body">
-                    <Field
-                      label="Email"
-                      type="text"
-                      name="email"
-                      placeholder="example@email.com"
-                      component={AuthInput}
-                      error={touched.email && errors.email}
-                    />
+              <div className="auth-page__form-body">
+                <div className="auth-page__form-fields">
+                  <Field
+                    label="Email"
+                    type="text"
+                    name="email"
+                    placeholder="Your email"
+                    autoComplete="email"
+                    component={AuthInput}
+                    error={touched.email && errors.email}
+                  />
 
+                  <Field
+                    label="Password"
+                    type="password"
+                    name="password"
+                    placeholder="Required"
+                    component={AuthInput}
+                    error={touched.password && errors.password}
+                    autoComplete={isSignInType ? 'new-password' : 'new-password'}
+                  />
+
+                  {authType === AuthPageTypes.signUp && (
                     <Field
                       label="Password"
                       type="password"
-                      name="password"
-                      placeholder="- - - - - - - -"
+                      name="confirmPassword"
+                      placeholder="Confirm"
                       component={AuthInput}
-                      error={touched.password && errors.password}
+                      error={touched.confirmPassword && errors.confirmPassword}
+                      autoComplete={isSignUpType && 'new-password'}
                     />
-
-                    {authType === AuthPageTypes.signUp && (
-                      <Field
-                        label="Confirm password"
-                        type="password"
-                        name="confirmPassword"
-                        placeholder="- - - - - - - -"
-                        component={AuthInput}
-                        error={touched.confirmPassword && errors.confirmPassword}
-                      />
-                    )}
-                  </div>
-
-                  <div className="auth-modal__errors">
-                    <ul className="auth-modal__errors-list">
-                      {Object.keys(errors)
-                        // eslint-disable-next-line array-callback-return
-                        .filter((err) => {
-                          if (authType === AuthPageTypes.signIn) {
-                            return err !== 'confirmPassword' && touched[err];
-                          }
-
-                          if (authType === AuthPageTypes.signUp) {
-                            return touched[err];
-                          }
-                        })
-                        .map((err) => (
-                          <li className="auth-modal__errors-item" key={err}>
-                            {errors[err]}
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-
-                  <div className="auth-modal__controls">
-                    <button
-                      className="auth-modal__submit-button"
-                      type="submit"
-                      disabled={loading}
-                    >
-                      Continue
-                    </button>
-                  </div>
-                </Form>
-
-                <div className="auth-modal__footer">
-                  {authType === AuthPageTypes.signIn && (
-                    <NavLink
-                      className="auth-modal__screen-link"
-                      to={`/${AuthPageTypes.signUp}`}
-                      onClick={resetForm}
-                    >
-                      Don&#39;t have an acount? Create one.
-                    </NavLink>
-                  )}
-
-                  {authType === AuthPageTypes.signUp && (
-                    <NavLink
-                      className="auth-modal__screen-link"
-                      to={`/${AuthPageTypes.signIn}`}
-                      onClick={resetForm}
-                    >
-                      Already have an account? Sign In.
-                    </NavLink>
                   )}
                 </div>
-              </section>
-            </div>
-          </div>
+
+                <div className="auth-page__form-errors">
+                  <ul className="auth-page__errors-list">
+                    {Object.keys(errors)
+                      // eslint-disable-next-line array-callback-return
+                      .filter((err) => {
+                        if (isSignInType) return err !== 'confirmPassword' && touched[err];
+                        if (isSignUpType) return touched[err];
+                      })
+                      .map((err) => (
+                        <li className="auth-page__errors-item" key={err}>
+                          {errors[err]}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+
+                <div className="auth-page__form-controls">
+                  <Button
+                    className="auth-page__submit-button"
+                    type="submit"
+                    disabled={loading}
+                    wide
+                  >
+                    Continue
+                  </Button>
+                </div>
+              </div>
+
+              <div className="auth-page__form-footer">
+                {authType === AuthPageTypes.signIn && (
+                  <NavLink
+                    className="auth-page__screen-link"
+                    to={`/${AuthPageTypes.signUp}`}
+                    onClick={resetForm}
+                  >
+                    Don&#39;t have an acount? Create one.
+                  </NavLink>
+                )}
+
+                {authType === AuthPageTypes.signUp && (
+                  <NavLink
+                    className="auth-page__screen-link"
+                    to={`/${AuthPageTypes.signIn}`}
+                    onClick={resetForm}
+                  >
+                    Already have an account? Sign In.
+                  </NavLink>
+                )}
+              </div>
+            </Form>
+          </Modal>
+
         </main>
       )}
     </Formik>

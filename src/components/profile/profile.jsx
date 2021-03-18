@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 
 import { SystemIconNames } from 'src/utils/const';
-import Icon from 'src/components/icon';
+import Button from 'src/components/button';
+import Headline from 'src/components/typography/headline';
 import './style.scss';
 
 const Profile = ({ user, onSignOut }) => {
@@ -9,15 +10,15 @@ const Profile = ({ user, onSignOut }) => {
 
   return (
     <section className="profile">
-      <p className="profile__title">{name || email}</p>
-      <button
-        className="profile__log-out-button"
-        type="button"
-        aria-label="Log out"
+      <Headline>{name || email}</Headline>
+
+      <Button
+        icon={SystemIconNames.signOut}
         onClick={onSignOut}
+        titleHidden
       >
-        <Icon icon={SystemIconNames.signOut} />
-      </button>
+        Sign Out
+      </Button>
     </section>
   );
 };

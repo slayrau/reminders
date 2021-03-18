@@ -1,14 +1,14 @@
-import cn from 'classnames';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import './style.scss';
 
 const AuthInput = ({ field, ...otherProps }) => {
-  const { label, type, placeholder, error } = otherProps;
+  const { label, type, placeholder, error, autoComplete } = otherProps;
 
   return (
     <label
-      className={cn('auth-input', {
+      className={classNames('auth-input', {
         'auth-input--error': error,
       })}
     >
@@ -18,6 +18,7 @@ const AuthInput = ({ field, ...otherProps }) => {
         className="auth-input__input"
         type={type}
         placeholder={placeholder}
+        autoComplete={autoComplete}
         {...field}
       />
     </label>

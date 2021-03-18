@@ -32,8 +32,8 @@ $icon-width: calc(var(--button-size) + 6px);
 
   color: var(--label-color-secondary);
   font-size: var(--font-size-body);
-  background-color: #dcdcdc;
-  border-radius: 6px;
+  background-color: #E3E3E9;
+  border-radius: 10px;
 
   &::placeholder {
     color: var(--label-color-tertiary)
@@ -41,17 +41,9 @@ $icon-width: calc(var(--button-size) + 6px);
 }
 
 .search__clear-button {
-  @extend .reset-button;
-
   position: absolute;
   right: 2px;
   top: 50%;
   transform: translateY(-50%);
-
-  display: flex;
-
-  width: $icon-width;
-  height: var(--button-size);
   border-radius: 50%;
-  cursor: pointer;
 }

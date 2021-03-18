@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import cn from 'classnames';
+import classNames from 'classnames';
 
 import { BadgeIconTypes, SystemIconTypes } from 'src/assets/icons';
 import { BadgeIconNames, SystemIconNames } from 'src/utils/const';
@@ -10,12 +10,12 @@ const IconTypes = {
   ...SystemIconTypes,
 };
 
-const Icon = ({ icon, className }) => {
+const Icon = ({ icon = BadgeIconNames.react, className }) => {
   const IconComponent = IconTypes[icon];
 
   return (
     <IconComponent
-      className={cn('icon', className)}
+      className={classNames('icon', className)}
     />
   );
 };

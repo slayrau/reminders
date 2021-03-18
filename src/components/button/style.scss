@@ -1,0 +1,38 @@
+@import 'src/styles/utils/extends.scss';
+
+.button {
+  @extend .reset-button;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-size);
+  min-width: var(--button-size);
+  padding: 0 8px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    backdrop-filter: brightness(0.95);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &--wide {
+    width: 100%;
+  }
+
+  &--secondary {
+    color: var(--system-blue);
+  }
+
+  &--icon {
+    padding: 0;
+  }
+
+  .icon + :not(.visually-hidden) {
+    margin-left: 10px;
+  }
+}

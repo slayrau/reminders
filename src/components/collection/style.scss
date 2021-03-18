@@ -1,0 +1,39 @@
+@import 'src/styles/utils/extends.scss';
+
+.collection {
+  display: flex;
+  flex-direction: column;
+}
+
+.collection__title {}
+
+.collection__list {
+  @extend .reset-list;
+
+  &--grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  &--columns-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  &--columns-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  &--columns-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  &--columns-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  
+  &--columns-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.collection__item {}

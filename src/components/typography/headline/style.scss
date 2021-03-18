@@ -1,0 +1,12 @@
+.headline {
+  font-size: var(--font-size-headline);
+  line-height: var(--line-height-headline);
+
+  &--weight-regular {
+    font-weight: 400;
+  }
+
+  &--weight-bold {
+    font-weight: bold;
+  }
+}

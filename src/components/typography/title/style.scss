@@ -1,0 +1,30 @@
+.title {
+  margin: 0;
+  
+  &--level-1 {
+    font-size: var(--font-size-title-1);
+    line-height: var(--line-height-tile-1);
+  }
+  
+  &--level-2 {
+    font-size: var(--font-size-title-2);
+    line-height: var(--line-height-tile-2);
+  }
+  
+  &--level-3 {
+    font-size: var(--font-size-title-3);
+    line-height: var(--line-height-tile-3);
+  }
+
+  &--weight-regular {
+    font-weight: 400;
+  }
+
+  &--weight-bold {
+    font-weight: 700;
+  }
+
+  &--caps {
+    text-transform: uppercase;
+  }
+}

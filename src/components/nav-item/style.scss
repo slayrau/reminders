@@ -1,0 +1,60 @@
+@import '/src/styles/utils/extends.scss';
+
+.nav-item {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 6px 12px;
+
+  font-size: var(--font-size-body);
+  text-decoration: none;
+  border-radius: 10px;
+
+  &--filter {
+    grid-auto-flow: row;
+    grid-template-columns: auto;
+    padding-top: 10px;
+    background-color: var(--background-primary);
+
+    .nav-item__count {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: var(--font-size-title-2);
+      font-weight: bold;
+    }
+  }
+
+  &--active {
+    background-color: currentColor;
+
+    .text {
+      color: #fff;
+    }
+
+    .badge {
+      background-color: #fff;
+
+      .icon {
+        color: currentColor;
+      }
+    }
+  }
+  
+  .badge {
+    width: var(--icon-size);
+  }
+}
+
+.nav-item__title {
+  @extend .text-ellipsis;
+
+  color: var(--label-color-secondary);
+}
+
+.nav-item__count { 
+  color: var(--label-color-tertiary);
+}

@@ -1,0 +1,28 @@
+.caption {
+  &--level-1 {
+    font-size: var(--font-size-caption-1);
+    line-height: var(--line-height-caption-1);
+  }
+  
+  &--level-2 {
+    font-size: var(--font-size-caption-2);
+    line-height: var(--line-height-caption-2);
+  }
+  
+  &--level-3 {
+    font-size: var(--font-size-caption-3);
+    line-height: var(--line-height-caption-3);
+  }
+  
+  &--weight-regular {
+    font-weight: 400;
+  }
+  
+  &--weight-bold {
+    font-weight: bold;
+  }
+
+  &--caps {
+    text-transform: uppercase;
+  }
+}

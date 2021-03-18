@@ -7,7 +7,7 @@
 }
 
 .auth-input__label-text {
-  min-width: 140px;
+  min-width: 70px;
   margin-right: 10px;
 }
 
@@ -15,29 +15,29 @@
   @extend .reset-input;
 
   flex: 1;
-  height: calc(var(--button-size) * 2);
+  height: calc(var(--button-size) * 1.5);
   padding: 0 10px;
   outline: none;
   text-align: center;
-  background-color: #f6f5fb;
+  background-color: var(--background-secondary);
   border: 1px solid transparent;
 
-  .auth-input:first-child & {
+  .auth-input:first-of-type & {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
 
-  .auth-input:last-child & {
+  .auth-input:last-of-type & {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
 
-  .auth-input:not(:last-child) & {
+  .auth-input:not(:last-of-type) & {
     border-bottom: 1px solid rgba(#000, 0.1);
   }
 
   .auth-input--error & {
-    border-color: red !important;
+    border-color: var(--system-red) !important;
   }
 
   .auth-input--error + .auth-input--error & {

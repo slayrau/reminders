@@ -1,1 +1,57 @@
-.main-page {}
+.app {}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  width: var(--drawer-width);
+  background-color: var(--background-secondary);
+}
+
+.drawer__container {
+  padding: 16px;
+  height: 100%;
+}
+
+.drawer__body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  & > *:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+
+.drawer__user-lists {
+  flex: 1;
+  padding-right: 16px;
+  margin-right: -16px;
+  overflow: hidden;
+
+  .collection__title {
+    padding-left: 16px;
+    padding-bottom: 16px;
+  }
+
+  .collection__list {
+    margin-right: -16px;
+    padding-right: 16px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+.drawer__add-list {
+  justify-content: left;
+}
+
+.main-content {
+  margin-left: var(--drawer-width);
+}
+
+.main-content__container {
+  padding: 10px;
+}
