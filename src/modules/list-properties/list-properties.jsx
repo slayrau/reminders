@@ -3,10 +3,11 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import classNames from 'classnames';
 
-import { Colors, BadgeIcons, ColorTypes, BadgeIconNames } from 'src/utils/const';
+import { Colors, BadgeIcons } from 'src/utils/const';
 
 import Selector from 'src/redux/selectors/list-properties';
 import ActionCreator from 'src/redux/actions/list-properties';
+import Operation from 'src/redux/operations/user-lists';
 
 import Modal from 'src/components/modal';
 import Title from 'src/components/typography/title';
@@ -18,36 +19,32 @@ import BadgeRadio from './components/badge-radio';
 import './style.scss';
 
 const ListProperties = () => {
-  // temp
-  const properties = {
-    name: 'Ullam veritatis earum',
-    color: ColorTypes.indigo,
-    icon: BadgeIconNames.person,
-  };
-
   const dispatch = useDispatch();
-  const isOpen = useSelector(Selector.isOpen);
+  const properties = useSelector(Selector.listProperties);
 
   const handleCancel = () => {
     dispatch(ActionCreator.close());
   };
 
-  const handleSubmit = ({ name, color, icon }) => {
-    alert(JSON.stringify({ name, color, icon }, null, 2));
-    dispatch(ActionCreator.close());
+  const handleSubmit = ({ title, color, icon }) => {
+    dispatch(Operation.addNewList({
+      title,
+      color,
+      icon,
+    }));
   };
 
-  if (!isOpen) return null;
+  if (!properties.isOpen) return null;
 
   return (
     <Formik
       initialValues={{
-        name: properties.name,
+        title: properties.title,
         color: properties.color,
         icon: properties.icon,
       }}
       validationSchema={Yup.object({
-        name: Yup.string().required('List name is reqired'),
+        title: Yup.string().required('List title is reqired'),
       })}
       onSubmit={handleSubmit}
       validateOnBlur={false}
@@ -63,7 +60,7 @@ const ListProperties = () => {
                 </div>
 
                 <div className="list-properties__header-content">
-                  <Title level="2" weight="bold">{properties.name}</Title>
+                  <Title level="2" weight="bold">{properties.title}</Title>
                 </div>
 
                 <div className="list-properties__header-right">
@@ -76,13 +73,13 @@ const ListProperties = () => {
 
                 <Field
                   className={classNames('list-properties__input', `system-color--${values.color}`)}
-                  name="name"
+                  name="title"
                   autoComplete="off"
                   spellCheck="false"
                 />
 
-                {errors.name && touched.name && (
-                  <div className="list-properties__error-message">{errors.name}</div>
+                {errors.title && touched.title && (
+                  <div className="list-properties__error-message">{errors.title}</div>
                 )}
               </div>
 
