@@ -1,0 +1,9 @@
+.reminders-page {
+  display: flex;
+  flex-direction: column;
+  margin-left: var(--drawer-width);
+
+  .collection {
+    padding: 8px 0;
+  }
+}

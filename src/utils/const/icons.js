@@ -105,12 +105,18 @@ const BadgeIconNames = {
 const SystemIconNames = {
   // C
   calendar: 'calendar',
+  checkmarkCircle: 'checkmarkCircle',
 
   // F
   flag: 'flag',
 
   // P
+  plus: 'plus',
   plusCircleOutline: 'plusCircleOutline',
+
+  // R
+  radioChecked: 'radioChecked',
+  radioUnchecked: 'radioUnchecked',
 
   // S
   search: 'search',
@@ -121,6 +127,7 @@ const SystemIconNames = {
   tray: 'tray',
 
   // X
+  xmarkCircle: 'xmarkCircle',
   xmarkCircleFilled: 'xmarkCircleFilled',
 };
 

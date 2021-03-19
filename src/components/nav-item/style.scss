@@ -52,9 +52,9 @@
 .nav-item__title {
   @extend .text-ellipsis;
 
-  color: var(--label-color-secondary);
+  color: var(--label-color-primary);
 }
 
 .nav-item__count { 
-  color: var(--label-color-tertiary);
+  color: var(--label-color-secondary);
 }

@@ -7,7 +7,7 @@ import Operation from 'src/redux/operations/auth';
 import Selector from 'src/redux/selectors/auth';
 
 import AuthPage from 'src/pages/auth-page';
-import MainPage from 'src/pages/main-page';
+import RemindersPage from 'src/pages/reminders-page';
 
 import Drawer from 'src/modules/drawer';
 import ListProperties from 'src/modules/list-properties';
@@ -39,7 +39,7 @@ const App = () => {
 
             <Route
               path="/"
-              component={MainPage}
+              component={RemindersPage}
             />
 
             <Redirect to="/" />

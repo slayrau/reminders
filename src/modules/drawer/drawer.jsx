@@ -18,6 +18,8 @@ import Search from 'src/components/search';
 import NavItem from 'src/components/nav-item';
 import Collection from 'src/components/collection';
 import Button from 'src/components/button';
+import Icon from 'src/components/icon';
+import Text from 'src/components/typography/text';
 
 import './style.scss';
 
@@ -87,9 +89,9 @@ const Drawer = () => {
           <Button
             className="drawer__add-list"
             onClick={handleAddNewList}
-            icon={SystemIconNames.plusCircleOutline}
           >
-            Add new list
+            <Icon icon={SystemIconNames.plusCircleOutline} />
+            <Text>Add new list</Text>
           </Button>
         </div>
       </div>

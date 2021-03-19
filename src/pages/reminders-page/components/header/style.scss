@@ -1,0 +1,39 @@
+@import 'src/styles/utils/extends.scss';
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 16px;
+  padding: 16px;
+
+  background-color: var(--background-primary);
+  border-bottom: 1px solid #C6C6C8;
+}
+
+.header__controls {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header__content {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr auto;
+  column-gap: 10px;
+  align-items: center;
+}
+
+.header__title {
+  @extend .text-ellipsis;
+
+  font-size: 34px;
+}
+
+.header__count {
+  font-size: 34px;
+  font-weight: bold;
+}
