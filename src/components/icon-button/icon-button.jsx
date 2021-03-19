@@ -8,7 +8,9 @@ import './style.scss';
 const IconButton = ({ className, icon, ...restProps }) => {
   return (
     <button className={classNames('icon-button', 'button', className)} {...restProps}>
-      <Icon icon={icon} />
+      <div className="button__container">
+        <Icon icon={icon} />
+      </div>
     </button>
   );
 };

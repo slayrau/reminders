@@ -1,33 +1,31 @@
-import ActionType from 'src/redux/types/list-properties';
+import ActionType from 'src/redux/types/current-list';
 
 const initialState = {
-  isOpen: false,
-  id: null,
-  title: null,
-  color: null,
-  icon: null,
+  data: {},
+  loading: true,
+  error: null,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CREATE_NEW_LIST: {
+    case ActionType.SET_CURRENT_LIST: {
       return {
         ...state,
-        ...action.payload,
+        data: action.payload,
       };
     }
 
-    case ActionType.OPEN_LIST: {
+    case ActionType.SET_LOADING: {
       return {
         ...state,
-        isOpen: true,
+        loading: action.payload,
       };
     }
 
-    case ActionType.CLOSE_LIST: {
+    case ActionType.SET_ERROR: {
       return {
         ...state,
-        isOpen: false,
+        error: action.payload,
       };
     }
 

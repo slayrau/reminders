@@ -32,8 +32,9 @@ const Drawer = () => {
     dispatch(AuthOperation.signOut());
   };
 
-  const handleAddNewList = () => {
-    dispatch(ListPropertiesActionCreator.addNewList());
+  const handleCreateNewList = () => {
+    dispatch(ListPropertiesActionCreator.openList());
+    dispatch(ListPropertiesActionCreator.createNewList());
   };
 
   useEffect(() => {
@@ -52,6 +53,7 @@ const Drawer = () => {
           <Search />
 
           <Collection
+            className="drawer__filters"
             columns="2"
             title="Filters"
             titleHidden
@@ -81,17 +83,17 @@ const Drawer = () => {
                 color={list.color}
                 icon={list.icon}
                 title={list.title}
-                count={list.count || 0}
+                count={list.reminderIds?.length || 0}
               />
             ))}
           </Collection>
 
           <Button
-            className="drawer__add-list"
-            onClick={handleAddNewList}
+            className="drawer__create-list-button"
+            onClick={handleCreateNewList}
           >
             <Icon icon={SystemIconNames.plusCircleOutline} />
-            <Text>Add new list</Text>
+            <Text>Create new list</Text>
           </Button>
         </div>
       </div>

@@ -1,9 +1,9 @@
-import ActionType from 'src/redux/types/user-lists';
+import ActionType from 'src/redux/types/current-list';
 
 const ActionCreator = {
-  setUserLists: (lists) => ({
-    type: ActionType.SET_USER_LISTS,
-    payload: lists,
+  setCurrentList: (list) => ({
+    type: ActionType.SET_CURRENT_LIST,
+    payload: list,
   }),
 
   setLoading: (loading) => ({

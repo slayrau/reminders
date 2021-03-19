@@ -1,24 +1,25 @@
-import { auth } from 'src/firebase';
-
-const signUp = (email, password) => (
-  auth.createUserWithEmailAndPassword(email, password)
-);
-
-const signIn = (email, password) => (
-  auth.signInWithEmailAndPassword(email, password)
-);
-
-const signOut = () => (
-  auth.signOut()
-);
-
-const checkUserSigned = () => (
-  auth.getRedirectResult().then(() => auth.currentUser)
-);
+import { firestore, auth } from 'src/firebase';
 
 export default {
-  signIn,
-  signUp,
-  signOut,
-  checkUserSigned,
+  signUp: (email, password) => (
+    auth.createUserWithEmailAndPassword(email, password)
+  ),
+
+  signIn: (email, password) => (
+    auth.signInWithEmailAndPassword(email, password)
+  ),
+
+  signOut: () => (
+    auth.signOut()
+  ),
+
+  initializeUserStore: async ({ email, uid }) => (
+    firestore.collection('users').doc(uid).set({
+      email,
+    })
+  ),
+
+  checkUserSigned: () => (
+    auth.getRedirectResult().then(() => auth.currentUser)
+  ),
 };

@@ -1,24 +1,31 @@
-import FirestoreApi from 'src/api/firestore';
+import ListApi from 'src/api/list';
 import ListPropertiesActionCreator from 'src/redux/actions/list-properties';
 import UserListsActionCreator from 'src/redux/actions/user-lists';
 import { convertDoc } from 'src/utils/helpers/firebase';
 
 const Operation = {
-  addNewList: ({ title, color, icon }) => (dispatch) => {
+  createList: ({ title, color, icon }, callback) => async (dispatch) => {
     try {
-      FirestoreApi.addNewList({ title, color, icon });
+      const response = await ListApi.createList({ title, color, icon });
+      callback(response.id);
     } catch (error) {
-      console.log('error:', error);
+      console.log('Creating user list error', error);
     } finally {
-      dispatch(ListPropertiesActionCreator.close());
+      dispatch(ListPropertiesActionCreator.closeList());
     }
   },
 
   subscribeToListsUpdate: () => (dispatch) => {
-    FirestoreApi.subscribeToListsUpdate((doc) => {
-      const convertedLists = doc.docs.map(convertDoc);
+    ListApi.subscribeToListsUpdate((snapshot) => {
+      try {
+        const convertedLists = snapshot.docs.map(convertDoc);
 
-      dispatch(UserListsActionCreator.setUserLists(convertedLists));
+        dispatch(UserListsActionCreator.setUserLists(convertedLists));
+      } catch (error) {
+        dispatch(UserListsActionCreator.setError(error));
+      } finally {
+        dispatch(UserListsActionCreator.setLoading(false));
+      }
     });
   },
 };

@@ -9,7 +9,9 @@ const Button = ({ children, className, type, wide, secondary, ...restProps }) =>
     type={type}
     {...restProps}
   >
-    {children}
+    <div className="button__container">
+      {children}
+    </div>
   </button>
 );
 

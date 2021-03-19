@@ -105,6 +105,7 @@ const BadgeIconNames = {
 const SystemIconNames = {
   // C
   calendar: 'calendar',
+  checkmark: 'checkmark',
   checkmarkCircle: 'checkmarkCircle',
 
   // F
@@ -124,9 +125,12 @@ const SystemIconNames = {
 
   // T
   today: 'today',
+  trash: 'trash',
+  trashCircle: 'trashCircle',
   tray: 'tray',
 
   // X
+  xmark: 'xmark',
   xmarkCircle: 'xmarkCircle',
   xmarkCircleFilled: 'xmarkCircleFilled',
 };

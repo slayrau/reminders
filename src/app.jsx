@@ -38,7 +38,7 @@ const App = () => {
             <Drawer />
 
             <Route
-              path="/"
+              path="/:listType/:listId"
               component={RemindersPage}
             />
 

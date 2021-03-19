@@ -1,6 +1,9 @@
 @import 'src/styles/utils/extends.scss';
 
 .reminder {
+  padding: 8px;
+  border-bottom: 1px solid #C6C6C8;
+
   &--completed {
     .text {
       color: var(--label-color-secondary);
@@ -13,20 +16,22 @@
   grid-auto-flow: column;
   column-gap: 8px;
   grid-template-columns: auto 1fr;
-  padding-left: 8px;
 }
 
 .reminder__left {}
 
 .reminder__checkbox {
-  width: var(--button-size);
-  width: var(--button-size);
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
+
+  .reminders-page &--checked {
+    color: currentColor;
+  }
 }
 
 .reminder__right {
   flex: 1;
-  border-bottom: 1px solid #C6C6C8;
 }
 
 .reminders__edit-button {
@@ -34,9 +39,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 8px;
-  
   text-align: left;
-  border-radius: 0;
   overflow: hidden;
 }
 
@@ -59,29 +62,36 @@
   
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
-  background-color: var(--background-secondary);
+  background-color: var(--background-tertiary);
   box-sizing: content-box;
+  border-radius: 8px;
   resize: none;
 }
 
 .reminder__controls {
   display: grid;
   grid-auto-flow: column;
+  grid-template-columns: auto auto 1fr;
   column-gap: 10px;
-  justify-content: left;
   padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 4px;
 }
 
 .reminder__control-button {
-  border-radius: 50%;
-
-  &--cancel {
-    color: var(--system-red);
-  }
+  padding-left: 4px;
 
   &--done {
     color: var(--system-blue);
+  }
+
+  &--cancel {
+  }
+
+  &--remove {
+    margin-left: auto;
+    color: var(--system-red);
+  }
+
+  .icon {
+    margin-right: 8px;
   }
 }

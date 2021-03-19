@@ -2,6 +2,7 @@ import { SystemIconNames } from 'src/utils/const';
 
 // C
 import { ReactComponent as Calendar } from './calendar.svg';
+import { ReactComponent as Checkmark } from './checkmark.svg';
 import { ReactComponent as CheckmarkCircle } from './checkmark-circle.svg';
 
 // F
@@ -21,15 +22,19 @@ import { ReactComponent as SignOut } from './sign-out.svg';
 
 // T
 import { ReactComponent as Today } from './today.svg';
+import { ReactComponent as Trash } from './trash.svg';
+import { ReactComponent as TrashCircle } from './trash-circle.svg';
 import { ReactComponent as Tray } from './tray.svg';
 
 // X
+import { ReactComponent as Xmark } from './xmark.svg';
 import { ReactComponent as XmarkCircle } from './xmark-circle.svg';
 import { ReactComponent as XmarkCircleFilled } from './xmark-circle-filled.svg';
 
 const SystemIconTypes = {
   // C
   [SystemIconNames.calendar]: Calendar,
+  [SystemIconNames.checkmark]: Checkmark,
   [SystemIconNames.checkmarkCircle]: CheckmarkCircle,
 
   // F
@@ -51,9 +56,12 @@ const SystemIconTypes = {
 
   // T
   [SystemIconNames.today]: Today,
+  [SystemIconNames.trash]: Trash,
+  [SystemIconNames.trashCircle]: TrashCircle,
   [SystemIconNames.tray]: Tray,
 
   // X
+  [SystemIconNames.xmark]: Xmark,
   [SystemIconNames.xmarkCircle]: XmarkCircle,
   [SystemIconNames.xmarkCircleFilled]: XmarkCircleFilled,
 };

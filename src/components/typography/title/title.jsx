@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import './style.scss';
 
-const Title = ({ className, level, weight, caps, children }) => {
+const Title = ({ children, className, level, weight, caps, ...restProps }) => {
   const Component = `h${level}`;
 
   return (
@@ -11,6 +11,7 @@ const Title = ({ className, level, weight, caps, children }) => {
       className={classNames('title', `title--level-${level}`, `title--weight-${weight}`, className, {
         'title--caps': caps,
       })}
+      {...restProps}
     >
       {children}
     </Component>

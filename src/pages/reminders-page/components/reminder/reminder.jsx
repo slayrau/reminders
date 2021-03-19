@@ -7,8 +7,10 @@ import { SystemIconNames } from 'src/utils/const/icons';
 import Button from 'src/components/button';
 import IconButton from 'src/components/icon-button';
 import Text from 'src/components/typography/text';
+import Headline from 'src/components/typography/headline';
 
 import './style.scss';
+import Icon from 'src/components/icon/icon';
 
 const getCheckedIcon = (completed) => (
   completed ? SystemIconNames.radioChecked : SystemIconNames.radioUnchecked
@@ -18,9 +20,13 @@ const getCheckboxTitle = (completed) => (
   `Reminder: ${completed ? 'completed' : 'not completed'}.`
 );
 
-const Reminder = ({ id, text, completed, editing, onEdit, onCancel }) => {
-  const handleSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2))
+const Reminder = ({ id, text, completed, editing, onEdit, onCancel, onSubmit, onRemove }) => {
+  const handleToggleCheckbox = () => {
+    onSubmit({
+      id,
+      text,
+      completed: !completed,
+    });
   };
 
   if (!editing) {
@@ -33,9 +39,12 @@ const Reminder = ({ id, text, completed, editing, onEdit, onCancel }) => {
         <div className="reminder__content">
           <div className="reminder__left">
             <IconButton
-              className="reminder__checkbox"
+              className={classNames('reminder__checkbox', {
+                'reminder__checkbox--checked': completed,
+              })}
               icon={getCheckedIcon(completed)}
               aria-label={getCheckboxTitle(completed)}
+              onClick={handleToggleCheckbox}
             />
           </div>
 
@@ -56,8 +65,8 @@ const Reminder = ({ id, text, completed, editing, onEdit, onCancel }) => {
   if (editing) {
     return (
       <Formik
-        initialValues={{ text, completed }}
-        onSubmit={handleSubmit}
+        initialValues={{ id, text, completed }}
+        onSubmit={onSubmit}
       >
         {({ values, setFieldValue }) => (
           <div className="reminder reminder--editing">
@@ -65,7 +74,9 @@ const Reminder = ({ id, text, completed, editing, onEdit, onCancel }) => {
               <div className="reminder__content">
                 <div className="reminder__left">
                   <IconButton
-                    className="reminder__checkbox"
+                    className={classNames('reminder__checkbox', {
+                      'reminder__checkbox--checked': values.completed,
+                    })}
                     type="button"
                     icon={getCheckedIcon(values.completed)}
                     aria-label={getCheckboxTitle(values.completed)}
@@ -89,20 +100,33 @@ const Reminder = ({ id, text, completed, editing, onEdit, onCancel }) => {
                     </label>
 
                     <div className="reminder__controls">
-                      <IconButton
-                        icon={SystemIconNames.xmarkCircle}
+                      <Button
+                        className="reminder__control-button reminder__control-button--done"
+                        type="submit"
+                      >
+                        <Icon icon={SystemIconNames.checkmark} />
+                        <Headline>Done</Headline>
+                      </Button>
+
+                      <Button
                         className="reminder__control-button reminder__control-button--cancel"
                         type="button"
-                        aria-label="Cancel"
                         onClick={onCancel}
-                      />
+                      >
+                        <Icon icon={SystemIconNames.xmark} />
+                        <Headline>Cancel</Headline>
+                      </Button>
 
-                      <IconButton
-                        icon={SystemIconNames.checkmarkCircle}
-                        className="reminder__control-button reminder__control-button--done"
-                        aria-label="Done"
-                        type="submit"
-                      />
+                      {id !== 'NEW_REMINDER' && (
+                        <Button
+                          className="reminder__control-button reminder__control-button--remove"
+                          type="button"
+                          onClick={onRemove}
+                        >
+                          <Icon icon={SystemIconNames.trash} />
+                          <Headline>Remove</Headline>
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </div>

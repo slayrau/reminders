@@ -3,12 +3,13 @@ import classNames from 'classnames';
 
 import './style.scss';
 
-const Text = ({ children, className, weight, visuallyHidden }) => (
+const Text = ({ children, className, weight, visuallyHidden, ...restProps }) => (
   <p
     className={classNames('text', className, {
       [`text--weight-${weight}`]: weight,
       'visually-hidden': visuallyHidden,
     })}
+    {...restProps}
   >
     {children}
   </p>
