@@ -1,5 +1,4 @@
 import AuthApi from 'src/api/auth';
-import FirestoreApi from 'src/api/firestore';
 import ActionCreator from 'src/redux/actions/auth';
 
 const Operation = {
@@ -32,7 +31,7 @@ const Operation = {
     try {
       dispatch(ActionCreator.setLoading(true));
       const response = await AuthApi.signUp(email, password);
-      await FirestoreApi.initializeUserStore(response.user);
+      await AuthApi.initializeUserStore(response.user);
       dispatch(ActionCreator.setUser(response.user));
     } catch (error) {
       dispatch(ActionCreator.setError(error));

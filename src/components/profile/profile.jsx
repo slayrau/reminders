@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import { SystemIconNames } from 'src/utils/const';
-import Button from 'src/components/button';
+import IconButton from 'src/components/icon-button';
 import Headline from 'src/components/typography/headline';
 import './style.scss';
 
@@ -12,13 +12,11 @@ const Profile = ({ user, onSignOut }) => {
     <section className="profile">
       <Headline>{name || email}</Headline>
 
-      <Button
+      <IconButton
         icon={SystemIconNames.signOut}
         onClick={onSignOut}
-        titleHidden
-      >
-        Sign Out
-      </Button>
+        aria-label="Sign Out"
+      />
     </section>
   );
 };

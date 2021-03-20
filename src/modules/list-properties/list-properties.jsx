@@ -1,37 +1,44 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import classNames from 'classnames';
 
+// UTILS
 import { Colors, BadgeIcons } from 'src/utils/const';
 
+// REDUX
 import Selector from 'src/redux/selectors/list-properties';
 import ActionCreator from 'src/redux/actions/list-properties';
 import Operation from 'src/redux/operations/user-lists';
 
+// COMPONENTS
 import Modal from 'src/components/modal';
 import Title from 'src/components/typography/title';
+import Headline from 'src/components/typography/headline/headline';
 import Badge from 'src/components/badge';
 import Button from 'src/components/button';
 import Collection from 'src/components/collection';
 
+// OWN
 import BadgeRadio from './components/badge-radio';
 import './style.scss';
 
 const ListProperties = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const properties = useSelector(Selector.listProperties);
 
   const handleCancel = () => {
-    dispatch(ActionCreator.close());
+    dispatch(ActionCreator.closeList());
   };
 
   const handleSubmit = ({ title, color, icon }) => {
-    dispatch(Operation.addNewList({
+    dispatch(Operation.createList({
       title,
       color,
       icon,
-    }));
+    }, (id) => history.push(`/lists/${id}`)));
   };
 
   if (!properties.isOpen) return null;
@@ -56,7 +63,9 @@ const ListProperties = () => {
             <Form className="list-properties__form">
               <div className="list-properties__header">
                 <div className="list-properties__header-left">
-                  <Button onClick={handleCancel} secondary>Cancel</Button>
+                  <Button onClick={handleCancel} secondary>
+                    <Headline>Cancel</Headline>
+                  </Button>
                 </div>
 
                 <div className="list-properties__header-content">
@@ -64,7 +73,9 @@ const ListProperties = () => {
                 </div>
 
                 <div className="list-properties__header-right">
-                  <Button type="submit" secondary>Done</Button>
+                  <Button type="submit" secondary>
+                    <Headline>Done</Headline>
+                  </Button>
                 </div>
               </div>
 

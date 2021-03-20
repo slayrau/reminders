@@ -3,12 +3,10 @@
 .button {
   @extend .reset-button;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: var(--button-size);
   min-width: var(--button-size);
   padding: 0 8px;
+  color: var(--label-color-primary);
   border-radius: 6px;
   cursor: pointer;
 
@@ -24,15 +22,13 @@
     width: 100%;
   }
 
-  &--secondary {
-    color: var(--system-blue);
-  }
-
   &--icon {
     padding: 0;
   }
+}
 
-  .icon + :not(.visually-hidden) {
-    margin-left: 10px;
-  }
+.button__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -1,0 +1,97 @@
+@import 'src/styles/utils/extends.scss';
+
+.reminder {
+  padding: 8px;
+  border-bottom: 1px solid #C6C6C8;
+
+  &--completed {
+    .text {
+      color: var(--label-color-secondary);
+    }
+  }
+}
+
+.reminder__content {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 8px;
+  grid-template-columns: auto 1fr;
+}
+
+.reminder__left {}
+
+.reminder__checkbox {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+
+  .reminders-page &--checked {
+    color: currentColor;
+  }
+}
+
+.reminder__right {
+  flex: 1;
+}
+
+.reminders__edit-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px;
+  text-align: left;
+  overflow: hidden;
+}
+
+.reminder__fields {
+  display: grid;
+  grid-auto-flow: row;
+}
+
+.reminder__label {
+  display: flex;
+}
+
+.reminder__textarea {
+  @extend .reset-input;
+
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px;
+  
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  background-color: var(--background-tertiary);
+  box-sizing: content-box;
+  border-radius: 8px;
+  resize: none;
+}
+
+.reminder__controls {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto auto 1fr;
+  column-gap: 10px;
+  padding-top: 8px;
+}
+
+.reminder__control-button {
+  padding-left: 4px;
+
+  &--done {
+    color: var(--system-blue);
+  }
+
+  &--cancel {
+  }
+
+  &--remove {
+    margin-left: auto;
+    color: var(--system-red);
+  }
+
+  .icon {
+    margin-right: 8px;
+  }
+}

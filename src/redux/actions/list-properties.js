@@ -2,8 +2,8 @@ import ActionType from 'src/redux/types/list-properties';
 import { BadgeIconNames, ColorTypes } from 'src/utils/const';
 
 const ActionCreator = {
-  addNewList: () => ({
-    type: ActionType.ADD_NEW_LIST,
+  createNewList: () => ({
+    type: ActionType.CREATE_NEW_LIST,
     payload: {
       id: 'NEW_LIST',
       title: 'New list',
@@ -12,12 +12,16 @@ const ActionCreator = {
     },
   }),
 
-  open: () => ({
-    type: ActionType.OPEN,
+  openList: () => ({
+    type: ActionType.OPEN_LIST,
   }),
 
-  close: () => ({
-    type: ActionType.CLOSE,
+  closeList: () => ({
+    type: ActionType.CLOSE_LIST,
+  }),
+
+  reset: () => ({
+    type: ActionType.RESET,
   }),
 };
 

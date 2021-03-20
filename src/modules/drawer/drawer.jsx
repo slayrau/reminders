@@ -18,6 +18,8 @@ import Search from 'src/components/search';
 import NavItem from 'src/components/nav-item';
 import Collection from 'src/components/collection';
 import Button from 'src/components/button';
+import Icon from 'src/components/icon';
+import Text from 'src/components/typography/text';
 
 import './style.scss';
 
@@ -30,8 +32,9 @@ const Drawer = () => {
     dispatch(AuthOperation.signOut());
   };
 
-  const handleAddNewList = () => {
-    dispatch(ListPropertiesActionCreator.addNewList());
+  const handleCreateNewList = () => {
+    dispatch(ListPropertiesActionCreator.openList());
+    dispatch(ListPropertiesActionCreator.createNewList());
   };
 
   useEffect(() => {
@@ -50,6 +53,7 @@ const Drawer = () => {
           <Search />
 
           <Collection
+            className="drawer__filters"
             columns="2"
             title="Filters"
             titleHidden
@@ -79,17 +83,17 @@ const Drawer = () => {
                 color={list.color}
                 icon={list.icon}
                 title={list.title}
-                count={list.count || 0}
+                count={list.reminderIds?.length || 0}
               />
             ))}
           </Collection>
 
           <Button
-            className="drawer__add-list"
-            onClick={handleAddNewList}
-            icon={SystemIconNames.plusCircleOutline}
+            className="drawer__create-list-button"
+            onClick={handleCreateNewList}
           >
-            Add new list
+            <Icon icon={SystemIconNames.plusCircleOutline} />
+            <Text>Create new list</Text>
           </Button>
         </div>
       </div>
