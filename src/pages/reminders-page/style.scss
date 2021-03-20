@@ -1,5 +1,8 @@
 .reminders-page {
   display: flex;
   flex-direction: column;
-  margin-left: var(--drawer-width);
+
+  [data-small-media="false"] & {
+    margin-left: var(--drawer-width);
+  }
 }

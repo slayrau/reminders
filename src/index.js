@@ -5,13 +5,16 @@ import { Provider } from 'react-redux';
 
 import 'src/firebase';
 import store from 'src/redux/store';
+import { MediaProvider } from 'src/contexts/media';
 import App from './app';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <MediaProvider>
+          <App />
+        </MediaProvider>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,

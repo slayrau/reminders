@@ -4,8 +4,12 @@
   left: 0;
   bottom: 0;
 
-  width: var(--drawer-width);
+  width: 100%;
   background-color: var(--background-secondary);
+  
+  [data-small-media="false"] & {
+    width: var(--drawer-width);
+  }
 }
 
 .drawer__container {
@@ -20,12 +24,6 @@
 
   & > *:not(:last-child) {
     margin-bottom: 16px;
-  }
-}
-
-.drawer__filters {
-  .collection__list {
-    gap: 8px;
   }
 }
 

@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import classNames from 'classnames';
+
+// CONTEXT
+import { useMediaContext } from 'src/contexts/media';
 
 // REDUX
 import CurrentListOperation from 'src/redux/operations/current-list';
@@ -22,8 +25,14 @@ import './style.scss';
 const RemindersPage = () => {
   const { listType, listId } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
+  const isSmallMedia = useMediaContext();
   const currentList = useSelector(CurrentListSelector.currentList);
   const reminders = useSelector(RemindersSelector.reminders);
+
+  const handleBackward = () => {
+    history.replace('/');
+  };
 
   const handleAddReminder = () => {
     dispatch(RemindersActionCreator.addReminder());
@@ -66,7 +75,9 @@ const RemindersPage = () => {
       <Header
         title={currentList.data.title}
         count={currentList.data.reminderIds?.length || 0}
+        onBackward={handleBackward}
         onAddReminder={handleAddReminder}
+        isSmallMedia={isSmallMedia}
       />
 
       <Collection title="Reminders" titleHidden>

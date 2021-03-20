@@ -107,6 +107,7 @@ const SystemIconNames = {
   calendar: 'calendar',
   checkmark: 'checkmark',
   checkmarkCircle: 'checkmarkCircle',
+  chevronBackward: 'chevronBackward',
 
   // F
   flag: 'flag',

@@ -4,6 +4,7 @@ import { SystemIconNames } from 'src/utils/const';
 import { ReactComponent as Calendar } from './calendar.svg';
 import { ReactComponent as Checkmark } from './checkmark.svg';
 import { ReactComponent as CheckmarkCircle } from './checkmark-circle.svg';
+import { ReactComponent as ChevronBackward } from './chevron-backward.svg';
 
 // F
 import { ReactComponent as Flag } from './flag.svg';
@@ -36,6 +37,7 @@ const SystemIconTypes = {
   [SystemIconNames.calendar]: Calendar,
   [SystemIconNames.checkmark]: Checkmark,
   [SystemIconNames.checkmarkCircle]: CheckmarkCircle,
+  [SystemIconNames.chevronBackward]: ChevronBackward,
 
   // F
   [SystemIconNames.flag]: Flag,
