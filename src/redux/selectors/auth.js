@@ -1,8 +1,11 @@
 const Selector = {
   auth: (state) => state.auth,
-  user: (state) => state.auth.user,
-  loading: (state) => state.auth.loading,
-  error: (state) => state.auth.arror,
+  authData: (state) => state.auth.data,
+  authorized: (state) => state.auth.authorized,
+  authLoading: (state) => state.auth.authLoading,
+  dataUpdating: (state) => state.auth.dataUpdating,
+  photoUpdating: (state) => state.auth.photoUpdating,
+  error: (state) => state.auth.error,
 };
 
 export default Selector;

@@ -1,0 +1,18 @@
+@import 'src/styles/utils/extends.scss';
+
+.input-picture {
+  @extend .text-ellipsis;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: var(--button-size);
+  padding: 0 16px;
+  cursor: pointer;
+
+  .icon {
+    min-width: var(--icon-size);
+    margin-right: 8px;
+  }
+}

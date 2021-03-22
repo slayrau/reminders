@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 
 import './style.scss';
 
-const Headline = ({ children, className, weight }) => {
+const Headline = ({ children, className, weight, ...restProps }) => {
   return (
     <div
       className={classNames('headline', className, {
         [`headline--${weight}`]: weight,
       })}
+      {...restProps}
     >
       {children}
     </div>

@@ -9,8 +9,10 @@ import { AuthPageTypes } from 'src/utils/const';
 import { useMediaContext } from 'src/contexts/media';
 
 // REDUX
-import Operation from 'src/redux/operations/auth';
-import Selector from 'src/redux/selectors/auth';
+import AuthSelector from 'src/redux/selectors/auth';
+import AuthOperation from 'src/redux/operations/auth';
+import ListPropertiesSelector from 'src/redux/selectors/list-properties';
+import ProfilePropertiesSelector from 'src/redux/selectors/profile-properties';
 
 // PAGES
 import AuthPage from 'src/pages/auth-page';
@@ -19,20 +21,23 @@ import RemindersPage from 'src/pages/reminders-page';
 // MODULES
 import Drawer from 'src/modules/drawer';
 import ListProperties from 'src/modules/list-properties';
+import ProfileProperties from 'src/modules/profile-properties';
 
 import 'src/styles/index.scss';
 
 const App = () => {
   const dispatch = useDispatch();
-  const user = useSelector(Selector.user);
+  const userAuthorized = useSelector(AuthSelector.authorized);
+  const listPropertiesIsOpen = useSelector(ListPropertiesSelector.isOpen);
+  const profilePropertiesIsOpen = useSelector(ProfilePropertiesSelector.isOpen);
   const isSmallMedia = useMediaContext();
   const rootUrlMatch = useRouteMatch('/');
 
   useEffect(() => {
-    dispatch(Operation.checkUserSigned());
+    dispatch(AuthOperation.checkUserSigned());
   }, []);
 
-  if (!user) {
+  if (!userAuthorized) {
     return (
       <Switch>
         <Route path={[`/${AuthPageTypes.signIn}`, `/${AuthPageTypes.signUp}`]} component={AuthPage} />
@@ -55,7 +60,8 @@ const App = () => {
         <Redirect to="/" />
       </Switch>
 
-      <ListProperties />
+      {listPropertiesIsOpen && <ListProperties />}
+      {profilePropertiesIsOpen && <ProfileProperties />}
     </>
   );
 };

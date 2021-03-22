@@ -3,11 +3,12 @@ import classNames from 'classnames';
 
 import './style.scss';
 
-const Caption = ({ level, weight, caps, children }) => (
+const Caption = ({ level, weight, caps, children, ...restProps }) => (
   <div
     className={classNames('caption', `caption--level-${level}`, `caption--weight-${weight}`, {
       'caption--caps': caps,
     })}
+    {...restProps}
   >
     {children}
   </div>

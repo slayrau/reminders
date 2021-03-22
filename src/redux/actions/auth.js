@@ -1,14 +1,39 @@
 import ActionType from 'src/redux/types/auth';
 
 const ActionCreator = {
-  setUser: (user) => ({
-    type: ActionType.SET_USER,
-    payload: user,
+  setAuthData: ({ name, email, photo }) => ({
+    type: ActionType.SET_AUTH_DATA,
+    payload: { name, email, photo },
   }),
 
-  setLoading: (loading) => ({
-    type: ActionType.SET_LOADING,
+  setAuthLoading: (loading) => ({
+    type: ActionType.SET_AUTH_LOADING,
     payload: loading,
+  }),
+
+  setAuthorized: (status) => ({
+    type: ActionType.SET_AUTHORIZED,
+    payload: status,
+  }),
+
+  updateName: (name) => ({
+    type: ActionType.UPDATE_NAME,
+    payload: name,
+  }),
+
+  setDataUpdating: (status) => ({
+    type: ActionType.SET_DATA_UPDATING,
+    payload: status,
+  }),
+
+  updatePhoto: (photo) => ({
+    type: ActionType.UPDATE_PHOTO,
+    payload: photo,
+  }),
+
+  setPhotoUpdating: (status) => ({
+    type: ActionType.SET_PHOTO_UPDATING,
+    payload: status,
   }),
 
   setError: (error) => ({
@@ -16,8 +41,8 @@ const ActionCreator = {
     payload: error,
   }),
 
-  resetAuth: () => ({
-    type: ActionType.RESET_AUTH,
+  resetAuthData: () => ({
+    type: ActionType.RESET_AUTH_DATA,
   }),
 };
 

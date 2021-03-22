@@ -1,49 +1,108 @@
 import AuthApi from 'src/api/auth';
-import ActionCreator from 'src/redux/actions/auth';
+import StorageApi from 'src/api/storage';
+import AuthActionCreator from 'src/redux/actions/auth';
+import ActionCreator from 'src/redux/actions/profile-properties';
 
 const Operation = {
-  checkUserSigned: () => async (dispatch) => {
+  signIn: ({ email, password }) => async (dispatch) => {
     try {
-      dispatch(ActionCreator.setLoading(true));
-      const user = await AuthApi.checkUserSigned();
-      // User is signed in.
-      if (user) dispatch(ActionCreator.setUser(user));
+      dispatch(AuthActionCreator.setAuthLoading(true));
+
+      const { user } = await AuthApi.signIn({ email, password });
+
+      dispatch(AuthActionCreator.setAuthData({
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+      }));
+
+      dispatch(AuthActionCreator.setAuthorized(true));
     } catch (error) {
-      dispatch(ActionCreator.setError(error));
+      dispatch(AuthActionCreator.setError(error));
     } finally {
-      dispatch(ActionCreator.setLoading(false));
+      dispatch(AuthActionCreator.setAuthLoading(false));
     }
   },
 
-  signIn: (email, password) => async (dispatch) => {
+  signUp: ({ email, password }) => async (dispatch) => {
     try {
-      dispatch(ActionCreator.setLoading(true));
-      const response = await AuthApi.signIn(email, password);
-      dispatch(ActionCreator.setUser(response.user));
-    } catch (error) {
-      dispatch(ActionCreator.setError(error));
-    } finally {
-      dispatch(ActionCreator.setLoading(false));
-    }
-  },
+      dispatch(AuthActionCreator.setAuthLoading(true));
 
-  signUp: (email, password) => async (dispatch) => {
-    try {
-      dispatch(ActionCreator.setLoading(true));
-      const response = await AuthApi.signUp(email, password);
-      await AuthApi.initializeUserStore(response.user);
-      dispatch(ActionCreator.setUser(response.user));
+      const { user } = await AuthApi.signUp({ email, password });
+
+      dispatch(AuthActionCreator.setAuthData({
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+      }));
+
+      dispatch(AuthActionCreator.setAuthorized(true));
     } catch (error) {
-      dispatch(ActionCreator.setError(error));
+      dispatch(AuthActionCreator.setError(error));
     } finally {
-      dispatch(ActionCreator.setLoading(false));
+      dispatch(AuthActionCreator.setAuthLoading(false));
     }
   },
 
   signOut: () => (dispatch) => {
     AuthApi.signOut();
+    dispatch(AuthActionCreator.resetAuthData());
+  },
 
-    dispatch(ActionCreator.resetAuth());
+  checkUserSigned: () => async (dispatch) => {
+    try {
+      dispatch(AuthActionCreator.setAuthLoading(true));
+
+      const user = await AuthApi.checkUserSigned();
+
+      // User is signed in.
+      if (user) {
+        dispatch(AuthActionCreator.setAuthData({
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        }));
+
+        dispatch(AuthActionCreator.setAuthorized(true));
+      }
+    } catch (error) {
+      dispatch(AuthActionCreator.setError(error));
+    } finally {
+      dispatch(AuthActionCreator.setAuthLoading(false));
+    }
+  },
+
+  updateProfile: ({ name, email }) => async (dispatch) => {
+    try {
+      dispatch(AuthActionCreator.setDataUpdating(true));
+      await AuthApi.updateName(name);
+      dispatch(AuthActionCreator.updateName(name));
+    } catch (error) {
+      dispatch(AuthActionCreator.setError(error));
+    } finally {
+      dispatch(AuthActionCreator.setDataUpdating(false));
+    }
+  },
+
+  updatePhoto: (filePicture) => async (dispatch) => {
+    try {
+      dispatch(AuthActionCreator.setPhotoUpdating(true));
+      const photoUrl = await StorageApi.updatePhoto(filePicture);
+      dispatch(AuthActionCreator.updatePhoto(photoUrl));
+    } catch (error) {
+      dispatch(ActionCreator.setError(AuthActionCreator.setError(error)));
+    } finally {
+      dispatch(AuthActionCreator.setPhotoUpdating(false));
+    }
+  },
+
+  removePhoto: () => (dispatch) => {
+    try {
+      StorageApi.removePhoto();
+      dispatch(AuthActionCreator.updatePhoto(''));
+    } catch (error) {
+      dispatch(AuthActionCreator.setError(error));
+    }
   },
 };
 

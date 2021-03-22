@@ -105,6 +105,7 @@ const BadgeIconNames = {
 const SystemIconNames = {
   // C
   calendar: 'calendar',
+  camera: 'camera',
   checkmark: 'checkmark',
   checkmarkCircle: 'checkmarkCircle',
   chevronBackward: 'chevronBackward',
@@ -112,7 +113,12 @@ const SystemIconNames = {
   // F
   flag: 'flag',
 
+  // G
+  gear: 'gear',
+
   // P
+  personCircle: 'personCircle',
+  photoStack: 'photoStack',
   plus: 'plus',
   plusCircleOutline: 'plusCircleOutline',
 
@@ -123,6 +129,7 @@ const SystemIconNames = {
   // S
   search: 'search',
   signOut: 'signOut',
+  spinner: 'spinner',
 
   // T
   today: 'today',

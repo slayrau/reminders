@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { SystemIconNames } from 'src/utils/const';
 import Icon from 'src/components/icon';
-import Button from 'src/components/button';
+import IconButton from 'src/components/icon-button';
 import './style.scss';
 
 const Search = () => {
@@ -33,14 +33,12 @@ const Search = () => {
       </label>
 
       {value && (
-        <Button
+        <IconButton
           className="search__clear-button"
           icon={SystemIconNames.xmarkCircleFilled}
-          textHidden
           onClick={handleClearClick}
-        >
-          Cancel search
-        </Button>
+          aria-label="Cancel search"
+        />
       )}
     </div>
   );

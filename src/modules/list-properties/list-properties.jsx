@@ -14,10 +14,7 @@ import Operation from 'src/redux/operations/user-lists';
 
 // COMPONENTS
 import Modal from 'src/components/modal';
-import Title from 'src/components/typography/title';
-import Headline from 'src/components/typography/headline/headline';
 import Badge from 'src/components/badge';
-import Button from 'src/components/button';
 import Collection from 'src/components/collection';
 
 // OWN
@@ -41,8 +38,6 @@ const ListProperties = () => {
     }, (id) => history.push(`/lists/${id}`)));
   };
 
-  if (!properties.isOpen) return null;
-
   return (
     <Formik
       initialValues={{
@@ -58,27 +53,14 @@ const ListProperties = () => {
       validateOnChange={false}
     >
       {({ values, errors, touched, handleChange, handleBlur }) => (
-        <Modal style={{ height: '100%' }}>
-          <section className="list-properties">
-            <Form className="list-properties__form">
-              <div className="list-properties__header">
-                <div className="list-properties__header-left">
-                  <Button onClick={handleCancel} secondary>
-                    <Headline>Cancel</Headline>
-                  </Button>
-                </div>
-
-                <div className="list-properties__header-content">
-                  <Title level="2" weight="bold">{properties.title}</Title>
-                </div>
-
-                <div className="list-properties__header-right">
-                  <Button type="submit" secondary>
-                    <Headline>Done</Headline>
-                  </Button>
-                </div>
-              </div>
-
+        <Form className="list-properties__form">
+          <Modal
+            header
+            onCancel={handleCancel}
+            title={properties.title}
+            style={{ height: '100%' }}
+          >
+            <section className="list-properties">
               <div className="list-properties__body">
                 <Badge icon={values.icon} color={values.color} />
 
@@ -116,8 +98,6 @@ const ListProperties = () => {
                   ))}
                 </Collection>
 
-                <div className="list-properties__divider" />
-
                 <Collection
                   columns="6"
                   title="Badge icons"
@@ -137,9 +117,9 @@ const ListProperties = () => {
                   ))}
                 </Collection>
               </div>
-            </Form>
-          </section>
-        </Modal>
+            </section>
+          </Modal>
+        </Form>
       )}
     </Formik>
   );

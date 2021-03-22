@@ -42,17 +42,31 @@
 }
 
 .auth-page__form-fields {
+}
 
+.auth-page__input {
+  @extend .reset-input;
+
+  height: var(--button-size);
+  width: 100%;
+  padding: 0 16px;
+  border-radius: inherit;
+
+  &--error {
+    color: var(--system-red);
+    
+    &::placeholder {
+      color: var(--system-red);
+      opacity: 0.5;
+    }
+  }
 }
 
 .auth-page__form-errors {
-  padding-left: 140px;
 }
 
 .auth-page__errors-list {
   @extend .reset-list;
-  
-  margin-left: 10px;
 }
 
 .auth-page__errors-item {
@@ -65,7 +79,7 @@
     display: block;
     width: 8px;
     height: 8px;
-    margin: 0 10px;
+    margin: 0 16px;
     border-radius: 50%;
     background-color: currentColor;
   }
@@ -79,7 +93,7 @@
   color: #fff;
   background-color: var(--system-blue);
   border-radius: 10px;
-  height: calc(var(--button-size) * 1.5);
+  height: var(--button-size);
   cursor: pointer;
 }
 

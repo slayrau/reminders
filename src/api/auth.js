@@ -1,11 +1,11 @@
 import { firestore, auth } from 'src/firebase';
 
 export default {
-  signUp: (email, password) => (
+  signUp: ({ email, password }) => (
     auth.createUserWithEmailAndPassword(email, password)
   ),
 
-  signIn: (email, password) => (
+  signIn: ({ email, password }) => (
     auth.signInWithEmailAndPassword(email, password)
   ),
 
@@ -21,5 +21,11 @@ export default {
 
   checkUserSigned: () => (
     auth.getRedirectResult().then(() => auth.currentUser)
+  ),
+
+  updateName: (name) => (
+    auth.currentUser.updateProfile({
+      displayName: name,
+    })
   ),
 };

@@ -6,6 +6,10 @@
 
   width: 100%;
   background-color: var(--background-secondary);
+
+  [data-small-media="true"] & {
+    overflow-y: scroll;
+  }
   
   [data-small-media="false"] & {
     width: var(--drawer-width);
@@ -21,9 +25,15 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-
-  & > *:not(:last-child) {
+  
+  & > * {
     margin-bottom: 16px;
+  }
+}
+
+.drawer__filters {
+  .collection__list {
+    gap: 8px;
   }
 }
 
@@ -31,11 +41,18 @@
   flex: 1;
   padding-right: 16px;
   margin-right: -16px;
-  overflow: hidden;
+  
+  [data-small-media="false"] & {
+    overflow: hidden;
+
+    .collection__title {
+      border-bottom: 1px solid rgba(#000, 0.1);
+    }
+  }
 
   .collection__title {
     padding-left: 16px;
-    padding-bottom: 16px;
+    padding-bottom: 8px;
   }
 
   .collection__list {
@@ -43,12 +60,29 @@
     padding-right: 16px;
     overflow-x: hidden;
     overflow-y: auto;
+    
+    & > :first-child {
+      padding-top: 8px;
+    }
+
+    & > :last-child {
+      padding-bottom: 8px;
+    }
   }
 }
 
+.drawer__footer {
+  display: flex;
+  position: sticky;
+  bottom: 0;
+  margin-bottom: -16px;
+  margin-top: -16px;
+  background-color: var(--background-secondary);
+  border-top: 1px solid rgba(#000, 0.1);
+}
+
 .drawer__create-list-button {
-  align-self: flex-start;
-  padding-left: 4px;
+  margin-left: auto;
 
   .icon {
     margin-right: 10px;

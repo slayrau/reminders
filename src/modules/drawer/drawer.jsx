@@ -6,14 +6,13 @@ import { FILTERS } from 'src/utils/settings';
 import { SystemIconNames } from 'src/utils/const';
 
 // REUDX
-import AuthOperation from 'src/redux/operations/auth';
 import AuthSelector from 'src/redux/selectors/auth';
 import ListPropertiesActionCreator from 'src/redux/actions/list-properties';
+import ProfilePropertiesActionCreator from 'src/redux/actions/profile-properties';
 import UserListsSelector from 'src/redux/selectors/user-lists';
 import UserListsOperation from 'src/redux/operations/user-lists';
 
 // COMPONENTS
-import Profile from 'src/components/profile';
 import Search from 'src/components/search';
 import NavItem from 'src/components/nav-item';
 import Collection from 'src/components/collection';
@@ -21,15 +20,20 @@ import Button from 'src/components/button';
 import Icon from 'src/components/icon';
 import Text from 'src/components/typography/text';
 
+// OWN
+import Profile from './components/profile';
 import './style.scss';
 
 const Drawer = () => {
   const dispatch = useDispatch();
-  const authUser = useSelector(AuthSelector.user);
+  const authUserData = useSelector(AuthSelector.authData);
+  const dataUpdating = useSelector(AuthSelector.dataUpdating);
+  const photoUpdating = useSelector(AuthSelector.photoUpdating);
   const userLists = useSelector(UserListsSelector.userLists);
 
-  const handleSignOut = () => {
-    dispatch(AuthOperation.signOut());
+  const handleEdit = () => {
+    const { name, photo, email } = authUserData;
+    dispatch(ProfilePropertiesActionCreator.openProfile({ name, photo, email }));
   };
 
   const handleCreateNewList = () => {
@@ -46,8 +50,9 @@ const Drawer = () => {
       <div className="drawer__container">
         <div className="drawer__body">
           <Profile
-            user={authUser}
-            onSignOut={handleSignOut}
+            user={authUserData}
+            onEdit={handleEdit}
+            updatingInProcess={dataUpdating || photoUpdating}
           />
 
           <Search />
@@ -88,13 +93,15 @@ const Drawer = () => {
             ))}
           </Collection>
 
-          <Button
-            className="drawer__create-list-button"
-            onClick={handleCreateNewList}
-          >
-            <Icon icon={SystemIconNames.plusCircleOutline} />
-            <Text>Create new list</Text>
-          </Button>
+          <div className="drawer__footer">
+            <Button
+              className="drawer__create-list-button"
+              onClick={handleCreateNewList}
+            >
+              <Icon icon={SystemIconNames.plusCircleOutline} />
+              <Text>Create new list</Text>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

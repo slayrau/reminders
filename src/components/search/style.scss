@@ -1,14 +1,14 @@
 @import 'src/styles/utils/extends.scss';
 
-$icon-width: calc(var(--button-size) + 6px);
+$padding: 30px;
 
 .search {
   position: relative;
 }
 
 .search__icon {
-  width: $icon-width;
-  height: var(--button-size);
+  width: $padding;
+  height: $padding;
 
   &--search {
     position: absolute;
@@ -28,9 +28,9 @@ $icon-width: calc(var(--button-size) + 6px);
 
   width: 100%;
   height: 28px;
-  padding: 0 $icon-width;
+  padding: 0 $padding;
 
-  color: var(--label-color-secondary);
+  color: var(--label-color-primary);
   font-size: var(--font-size-body);
   background-color: #E3E3E9;
   border-radius: 10px;
@@ -44,6 +44,8 @@ $icon-width: calc(var(--button-size) + 6px);
   position: absolute;
   right: 2px;
   top: 50%;
+  min-width: 30px;
+  min-height: 30px;
   transform: translateY(-50%);
   border-radius: 50%;
 }

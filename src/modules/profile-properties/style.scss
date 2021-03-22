@@ -1,0 +1,102 @@
+@import 'src/styles/utils/extends.scss';
+
+.profile-properties {
+  display: grid;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.profile-properties__content {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+
+  & > * {
+    margin-bottom: 16px;
+  }
+}
+  
+.profile-properties__container {
+}
+
+.profile-properties__photo-controls {
+  .button {
+    padding: 0 16px;
+  }
+}
+
+.profile-properties__button {
+  @extend .text-ellipsis;
+
+  width: 100%;
+
+  &--change-photo {
+  }
+  
+  &--remove-photo {
+    color: var(--system-red);
+  }
+  
+  &--sign-out {
+    color: var(--system-red);
+    width: 100%;
+  }
+  
+  &--cancel-chosen {
+
+  }
+
+  .icon {
+    min-width: var(--icon-size);
+    margin-right: 8px;
+  }
+}
+
+.profile-properties__photo {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  border-radius: 10px;
+  background-color: var(--background-secondary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  
+  img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profile-properties__person-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+  }
+}
+
+.profile-properties__fields {
+}
+
+.profile-properties__input {
+  @extend .reset-input;
+
+  width: 100%;
+  height: var(--button-size);
+  padding: 0 16px;
+}
+
+.profile-properties__footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 0;
+  padding-top: 16px;
+  margin-top: auto;
+}
+
