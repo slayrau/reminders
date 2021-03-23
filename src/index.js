@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import 'src/firebase';
 import store from 'src/redux/store';
 import { MediaProvider } from 'src/contexts/media';
+import { ThemeProvider } from 'src/contexts/theme';
 import App from './app';
 
 ReactDOM.render(
@@ -13,7 +14,9 @@ ReactDOM.render(
     <BrowserRouter>
       <Provider store={store}>
         <MediaProvider>
-          <App />
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
         </MediaProvider>
       </Provider>
     </BrowserRouter>

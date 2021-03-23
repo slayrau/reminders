@@ -18,7 +18,7 @@
   row-gap: 16px;
   justify-items: center;
   padding: 16px;
-  border-bottom: 1px solid rgba(#000, 0.1);
+  border-bottom: 1px solid var(--background-separator);
 
   .badge {
     width: 96px;
@@ -57,7 +57,7 @@
     &:first-child {
       padding-bottom: 32px;
       margin-bottom: 32px;
-      border-bottom: 1px solid rgba(#000, 0.1);
+      border-bottom: 1px solid var(--background-separator);
     }
   }
 }

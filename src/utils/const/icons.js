@@ -107,14 +107,20 @@ const SystemIconNames = {
   calendar: 'calendar',
   camera: 'camera',
   checkmark: 'checkmark',
+  checkmarkCircleFill: 'checkmarkCircleFill',
   checkmarkCircle: 'checkmarkCircle',
   chevronBackward: 'chevronBackward',
+  chevronRight: 'chevronRight',
 
   // F
   flag: 'flag',
 
   // G
   gear: 'gear',
+
+  // M
+  moonCircle: 'moonCircle',
+  moonFill: 'moonFill',
 
   // P
   personCircle: 'personCircle',
@@ -130,8 +136,10 @@ const SystemIconNames = {
   search: 'search',
   signOut: 'signOut',
   spinner: 'spinner',
+  sunMax: 'sunMax',
 
   // T
+  themeCircle: 'themeCircle',
   today: 'today',
   trash: 'trash',
   trashCircle: 'trashCircle',

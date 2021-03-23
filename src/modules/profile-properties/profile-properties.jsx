@@ -3,7 +3,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Field, Formik, Form } from 'formik';
 
+// UTILS
 import { SystemIconNames } from 'src/utils/const/icons';
+import { Theme } from 'src/utils/const';
+
+// CONTEXT
+import { useThemeContext } from 'src/contexts/theme';
 
 // REDUX
 import ProfileParamsActionCreator from 'src/redux/actions/profile-properties';
@@ -17,6 +22,7 @@ import Modal from 'src/components/modal';
 import Icon from 'src/components/icon';
 import Bubble from 'src/components/bubble';
 import BubbleGroup from 'src/components/bubble/group';
+import Caption from 'src/components/typography/caption';
 
 // OWN
 import InputPicture from './components/input-picture';
@@ -24,8 +30,10 @@ import './style.scss';
 
 const ProfileProperties = () => {
   const [filePicture, setFilePicture] = useState(null);
-  const dispatch = useDispatch();
   const [reqestToRemovePhoto, setRequestToRemovePhoto] = useState(false);
+  const { themeId, setTheme } = useThemeContext();
+
+  const dispatch = useDispatch();
   const { name, email, photo } = useSelector(AuthSelector.authData);
   const blobPicture = filePicture ? URL.createObjectURL(filePicture) : '';
   const orginalPicture = reqestToRemovePhoto ? null : photo;
@@ -93,64 +101,93 @@ const ProfileProperties = () => {
         >
           <div className="profile-properties">
             <div className="profile-properties__content">
-              <div className="profile-properties__photo">
-                {(blobPicture || orginalPicture)
-                  ? (
-                    <img src={blobPicture || photo} alt="User photo" />
-                  ) : (
-                    <Icon className="profile-properties__person-icon" icon={SystemIconNames.personCircle} />
-                  )}
+
+              <div className="profile-properties__row">
+                <div className="profile-properties__photo">
+                  {(blobPicture || orginalPicture)
+                    ? (
+                      <img src={blobPicture || photo} alt="User photo" />
+                    ) : (
+                      <Icon className="profile-properties__person-icon" icon={SystemIconNames.personCircle} />
+                    )}
+                </div>
+
+                <BubbleGroup className="profile-properties__photo-controls" horizontal>
+                  <InputPicture
+                    name="file"
+                    setFilePicture={setFilePicture}
+                  />
+
+                  {!blobPicture
+                    ? (orginalPicture && (
+                      <Button
+                        className="profile-properties__button profile-properties__button--remove-photo"
+                        type="button"
+                        onClick={handleRemovePhoto}
+                        aria-label="Remove user photo"
+                      >
+                        <Icon icon={SystemIconNames.trash} />
+                        <Headline>Remove photo</Headline>
+                      </Button>
+                    )) : (
+                      <Button
+                        className="profile-properties__button profile-properties__button--cancel-selected"
+                        onClick={handleCancelSelect}
+                        type="button"
+                        aria-label="Cancel selected photo"
+                      >
+                        <Icon icon={SystemIconNames.xmark} />
+                        <Headline>Cancel</Headline>
+                      </Button>
+                    )}
+                </BubbleGroup>
               </div>
 
-              <BubbleGroup className="profile-properties__photo-controls" horizontal>
-                <InputPicture
-                  name="file"
-                  setFilePicture={setFilePicture}
-                />
+              <div className="profile-properties__row">
+                <Caption className="profile-properties__caption">Profile info</Caption>
 
-                {!blobPicture
-                  ? (orginalPicture && (
-                    <Button
-                      className="profile-properties__button profile-properties__button--remove-photo"
-                      type="button"
-                      onClick={handleRemovePhoto}
-                      aria-label="Remove user photo"
-                    >
-                      <Icon icon={SystemIconNames.trash} />
-                      <Headline>Remove photo</Headline>
-                    </Button>
-                  )) : (
-                    <Button
-                      className="profile-properties__button profile-properties__button--cancel-selected"
-                      onClick={handleCancelSelect}
-                      type="button"
-                      aria-label="Cancel selected photo"
-                    >
-                      <Icon icon={SystemIconNames.xmark} />
-                      <Headline>Cancel</Headline>
-                    </Button>
-                  )}
-              </BubbleGroup>
+                <BubbleGroup className="profile-properties__fields">
+                  <Field
+                    className="profile-properties__input"
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    autoComplete="off"
+                    spellCheck="false"
+                    aria-label="User name"
+                  />
+                  <Field
+                    className="profile-properties__input"
+                    type="text"
+                    name="email"
+                    placeholder="Email"
+                    aria-label="User email"
+                    disabled
+                  />
+                </BubbleGroup>
+              </div>
 
-              <BubbleGroup className="profile-properties__fields">
-                <Field
-                  className="profile-properties__input"
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  autoComplete="off"
-                  spellCheck="false"
-                  aria-label="User name"
-                />
-                <Field
-                  className="profile-properties__input"
-                  type="text"
-                  name="email"
-                  placeholder="Email"
-                  aria-label="User email"
-                  disabled
-                />
-              </BubbleGroup>
+              <div className="profile-properties__row">
+                <Caption className="profile-properties__caption">Theme</Caption>
+
+                <BubbleGroup>
+                  {Object.values(Theme).map((theme) => (
+                    <Button
+                      className="profile-properties__button profile-properties__button--theme"
+                      key={theme.id}
+                      id={theme.id}
+                      onClick={() => setTheme(theme.id)}
+                      type="button"
+                    >
+                      <Icon icon={theme.icon} />
+                      <Headline>{theme.title}</Headline>
+                      {theme.id === themeId && (
+                        <Icon className="profile-properties__icon--checkmark" icon={SystemIconNames.checkmarkCircleFill} />
+                      )}
+                    </Button>
+                  ))}
+                </BubbleGroup>
+              </div>
 
               <div className="profile-properties__footer">
                 <Bubble>

@@ -16,10 +16,10 @@
   }
   
   &--checked {
-    box-shadow: 0 0 0 4px var(--background-primary), 0 0 0 8px #C4C4C6;
+    box-shadow: 0 0 0 4px var(--background-primary), 0 0 0 8px var(--label-color-tertiary);
     
     &:focus-within {
-      box-shadow: 0 0 0 4px var(--background-primary), 0 0 0 8px #505050;
+      box-shadow: 0 0 0 4px var(--background-primary), 0 0 0 8px var(--label-color-primary);
     }
   }
 
@@ -27,7 +27,7 @@
     .icon {
       width: 100%;
       height: 100%;
-      color: #505050;
+      color: var(--label-color-primary);
     }
   }
 }
