@@ -31,7 +31,7 @@ import './style.scss';
 const ProfileProperties = () => {
   const [filePicture, setFilePicture] = useState(null);
   const [reqestToRemovePhoto, setRequestToRemovePhoto] = useState(false);
-  const { themeId, setTheme } = useThemeContext();
+  const { themeId, setThemeId, setTheme } = useThemeContext();
 
   const dispatch = useDispatch();
   const { name, email, photo } = useSelector(AuthSelector.authData);

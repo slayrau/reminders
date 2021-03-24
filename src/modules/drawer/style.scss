@@ -63,7 +63,7 @@
     overflow: hidden;
 
     .collection__title {
-      border-bottom: 1px solid rgba(#000, 0.1);
+      border-bottom: 1px solid var(--background-separator);
     }
   }
 
@@ -125,7 +125,7 @@
   margin-bottom: -16px;
   margin-top: -16px;
   background-color: var(--background-primary);
-  border-top: 1px solid rgba(#000, 0.1);
+  border-top: 1px solid var(--background-separator);
 }
 
 .drawer__create-list-button {
