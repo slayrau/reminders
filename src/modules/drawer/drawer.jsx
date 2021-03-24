@@ -37,7 +37,6 @@ const Drawer = () => {
   };
 
   const handleCreateNewList = () => {
-    dispatch(ListPropertiesActionCreator.openList());
     dispatch(ListPropertiesActionCreator.createNewList());
   };
 

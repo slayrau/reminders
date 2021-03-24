@@ -10,28 +10,19 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CREATE_NEW_LIST: {
-      return {
-        ...state,
-        ...action.payload,
-      };
-    }
-
     case ActionType.OPEN_LIST: {
+      const { id, title, color, icon } = action.payload;
+
       return {
-        ...state,
         isOpen: true,
+        id,
+        title,
+        color,
+        icon,
       };
     }
 
     case ActionType.CLOSE_LIST: {
-      return {
-        ...state,
-        isOpen: false,
-      };
-    }
-
-    case ActionType.RESET: {
       return initialState;
     }
 

@@ -8,9 +8,9 @@ import Button from 'src/components/button';
 import IconButton from 'src/components/icon-button';
 import Text from 'src/components/typography/text';
 import Headline from 'src/components/typography/headline';
+import Icon from 'src/components/icon/icon';
 
 import './style.scss';
-import Icon from 'src/components/icon/icon';
 
 const getCheckedIcon = (completed) => (
   completed ? SystemIconNames.radioChecked : SystemIconNames.radioUnchecked
@@ -100,32 +100,29 @@ const Reminder = ({ id, text, completed, editing, onEdit, onCancel, onSubmit, on
                     </label>
 
                     <div className="reminder__controls">
-                      <Button
+                      <IconButton
                         className="reminder__control-button reminder__control-button--done"
                         type="submit"
-                      >
-                        <Icon icon={SystemIconNames.checkmark} />
-                        <Headline>Done</Headline>
-                      </Button>
+                        aria-label="Done"
+                        icon={SystemIconNames.checkmark}
+                      />
 
-                      <Button
+                      <IconButton
                         className="reminder__control-button reminder__control-button--cancel"
                         type="button"
+                        aria-label="Cancel"
+                        icon={SystemIconNames.xmark}
                         onClick={onCancel}
-                      >
-                        <Icon icon={SystemIconNames.xmark} />
-                        <Headline>Cancel</Headline>
-                      </Button>
+                      />
 
                       {id !== 'NEW_REMINDER' && (
-                        <Button
+                        <IconButton
                           className="reminder__control-button reminder__control-button--remove"
                           type="button"
+                          aria-label="Remove"
+                          icon={SystemIconNames.trash}
                           onClick={onRemove}
-                        >
-                          <Icon icon={SystemIconNames.trash} />
-                          <Headline>Remove</Headline>
-                        </Button>
+                        />
                       )}
                     </div>
                   </div>

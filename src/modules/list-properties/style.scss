@@ -12,7 +12,7 @@
   height: 100%;
 }
 
-.list-properties__body {
+.list-properties__header {
   display: grid;
   grid-auto-flow: row;
   row-gap: 16px;
@@ -48,7 +48,7 @@
   color: var(--system-red);
 }
 
-.list-properties__footer {
+.list-properties__body {
   padding: 16px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -71,3 +71,17 @@
 }
 
 .list-properties__grid-list-item {}
+
+.list-properties__footer {
+  padding: 16px;
+  border-top: 1px solid var(--background-separator);
+}
+
+.list-properties__remove-list-button {
+  width: 100%;
+  color: var(--system-red);
+
+  .icon {
+    margin-right: 8px;
+  }
+}

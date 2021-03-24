@@ -3,7 +3,7 @@ import { BadgeIconNames, ColorTypes } from 'src/utils/const';
 
 const ActionCreator = {
   createNewList: () => ({
-    type: ActionType.CREATE_NEW_LIST,
+    type: ActionType.OPEN_LIST,
     payload: {
       id: 'NEW_LIST',
       title: 'New list',
@@ -12,16 +12,18 @@ const ActionCreator = {
     },
   }),
 
-  openList: () => ({
+  editCurrentList: ({ id, title, color, icon }) => ({
     type: ActionType.OPEN_LIST,
+    payload: {
+      id,
+      title,
+      color,
+      icon,
+    },
   }),
 
   closeList: () => ({
     type: ActionType.CLOSE_LIST,
-  }),
-
-  reset: () => ({
-    type: ActionType.RESET,
   }),
 };
 

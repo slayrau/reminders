@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import classNames from 'classnames';
 
 // UTILS
-import { Colors, BadgeIcons } from 'src/utils/const';
+import { Colors, BadgeIcons, SystemIconNames } from 'src/utils/const';
 
 // REDUX
 import Selector from 'src/redux/selectors/list-properties';
@@ -16,6 +16,9 @@ import Operation from 'src/redux/operations/user-lists';
 import Modal from 'src/components/modal';
 import Badge from 'src/components/badge';
 import Collection from 'src/components/collection';
+import Bubble from 'src/components/bubble';
+import Button from 'src/components/button';
+import Icon from 'src/components/icon';
 
 // OWN
 import BadgeRadio from './components/badge-radio';
@@ -30,17 +33,34 @@ const ListProperties = () => {
     dispatch(ActionCreator.closeList());
   };
 
-  const handleSubmit = ({ title, color, icon }) => {
-    dispatch(Operation.createList({
-      title,
-      color,
-      icon,
-    }, (id) => history.push(`/list/${id}`)));
+  const handleSubmit = ({ id, title, color, icon }) => {
+    if (id === 'NEW_LIST') {
+      dispatch(Operation.createList({
+        title,
+        color,
+        icon,
+      }, (listId) => history.push(`/list/${listId}`)));
+    } else {
+      dispatch(Operation.updateList({
+        id,
+        title,
+        color,
+        icon,
+      }));
+    }
+  };
+
+  const handleRemoveList = () => {
+    dispatch(Operation.removeList({
+      id: properties.id,
+      history,
+    }));
   };
 
   return (
     <Formik
       initialValues={{
+        id: properties.id,
         title: properties.title,
         color: properties.color,
         icon: properties.icon,
@@ -61,7 +81,7 @@ const ListProperties = () => {
             style={{ height: '100%' }}
           >
             <section className="list-properties">
-              <div className="list-properties__body">
+              <div className="list-properties__header">
                 <Badge icon={values.icon} color={values.color} />
 
                 <Field
@@ -78,7 +98,7 @@ const ListProperties = () => {
 
               <div className="list-properties__divider" />
 
-              <div className="list-properties__footer">
+              <div className="list-properties__body">
                 <Collection
                   columns="6"
                   title="Badge colors"
@@ -117,6 +137,20 @@ const ListProperties = () => {
                   ))}
                 </Collection>
               </div>
+
+              {properties.id !== 'NEW_LIST' && (
+                <div className="list-properties__footer">
+                  <Bubble>
+                    <Button
+                      className="list-properties__remove-list-button"
+                      onClick={handleRemoveList}
+                    >
+                      <Icon icon={SystemIconNames.trash} />
+                      Remove list
+                    </Button>
+                  </Bubble>
+                </div>
+              )}
             </section>
           </Modal>
         </Form>

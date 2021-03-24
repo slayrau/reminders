@@ -12,6 +12,26 @@ export default {
     })
   ),
 
+  updateList: ({ id, title, color, icon }) => (
+    firestore.collection('lists')
+      .doc(id)
+      .update({
+        title,
+        color,
+        icon,
+      })
+  ),
+
+  removeList: (id) => {
+    firestore.collection('lists').doc(id).delete();
+    firestore.collection('reminders')
+      .where('listId', '==', id)
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((reminder) => reminder.ref.delete());
+      });
+  },
+
   subscribeToCurrentList: ({ listType, listId }, callback) => (
     firestore.collection('lists').doc(listId).onSnapshot(callback)
   ),

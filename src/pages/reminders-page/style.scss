@@ -1,8 +1,15 @@
 .reminders-page {
   display: flex;
   flex-direction: column;
+  min-height: 100%;
 
   [data-small-media="false"] & {
     margin-left: var(--drawer-width);
   }
+}
+
+.reminders-page__add-reminder-button {
+  flex: 1;
+  width: 100%;
+  min-height: 300px;
 }

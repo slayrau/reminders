@@ -33,7 +33,7 @@ const Profile = ({ user, updatingInProcess, onEdit }) => {
         <Caption title={email}>{email}</Caption>
       </div>
 
-      <Icon icon={SystemIconNames.gear} />
+      <Icon icon={SystemIconNames.chevronRight} />
     </Button>
   );
 };

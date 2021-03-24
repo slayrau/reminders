@@ -1,8 +1,10 @@
 @import 'src/styles/utils/extends.scss';
 
+$button-size: 36px;
+
 .reminder {
   padding: 8px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--background-separator);
 
   &--completed {
     .text {
@@ -21,8 +23,11 @@
 .reminder__left {}
 
 .reminder__checkbox {
-  width: 36px;
-  height: 36px;
+  width: $button-size;
+  height: $button-size;
+  min-width: $button-size;
+  min-height: $button-size;
+
   border-radius: 50%;
 
   .reminders-page &--checked {
@@ -38,8 +43,11 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  min-height: $button-size;
   padding: 8px;
   text-align: left;
+  word-break: break-word;
   overflow: hidden;
 }
 
@@ -60,9 +68,10 @@
   width: 100%;
   padding: 8px;
   
+  color: var(--label-color-primary);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
-  background-color: var(--background-tertiary);
+  background-color: var(--background-secondary);
   box-sizing: content-box;
   border-radius: 8px;
   resize: none;
@@ -84,6 +93,7 @@
   }
 
   &--cancel {
+    color: var(--label-color-primary);
   }
 
   &--remove {

@@ -15,6 +15,27 @@ const Operation = {
     }
   },
 
+  updateList: ({ id, title, color, icon }) => (dispatch) => {
+    try {
+      ListApi.updateList({ id, title, color, icon });
+    } catch (error) {
+      console.log('Updating list error', error);
+    } finally {
+      dispatch(ListPropertiesActionCreator.closeList());
+    }
+  },
+
+  removeList: ({ id, history }) => async (dispatch) => {
+    try {
+      ListApi.removeList(id);
+      history.replace('/');
+    } catch (error) {
+      console.log('removeList error', error);
+    } finally {
+      dispatch(ListPropertiesActionCreator.closeList());
+    }
+  },
+
   subscribeToListsUpdate: () => (dispatch) => {
     ListApi.subscribeToListsUpdate((snapshot) => {
       try {
