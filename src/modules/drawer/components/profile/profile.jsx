@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import { SystemIconNames } from 'src/utils/const';
-import IconButton from 'src/components/icon-button';
+import Button from 'src/components/button';
 import Headline from 'src/components/typography/headline';
 import Caption from 'src/components/typography/caption';
 import Icon from 'src/components/icon';
@@ -11,7 +11,10 @@ const Profile = ({ user, updatingInProcess, onEdit }) => {
   const { name, email, photo } = user;
 
   return (
-    <section className="profile">
+    <Button
+      className="profile profile__button"
+      onClick={onEdit}
+    >
       <div className="profile__avatar">
         {updatingInProcess && (
           <Icon className="profile__spinner-icon" icon={SystemIconNames.spinner} />
@@ -30,12 +33,8 @@ const Profile = ({ user, updatingInProcess, onEdit }) => {
         <Caption title={email}>{email}</Caption>
       </div>
 
-      <IconButton
-        icon={SystemIconNames.gear}
-        onClick={onEdit}
-        aria-label="Edit profile"
-      />
-    </section>
+      <Icon icon={SystemIconNames.gear} />
+    </Button>
   );
 };
 

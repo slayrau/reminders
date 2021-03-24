@@ -35,7 +35,7 @@ const ListProperties = () => {
       title,
       color,
       icon,
-    }, (id) => history.push(`/lists/${id}`)));
+    }, (id) => history.push(`/list/${id}`)));
   };
 
   return (

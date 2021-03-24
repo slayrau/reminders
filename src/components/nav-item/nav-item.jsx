@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { SystemIconNames, BadgeIconNames, ColorTypes } from 'src/utils/const';
 import Badge from 'src/components/badge';
 import Text from 'src/components/typography/text';
+import Icon from 'src/components/icon';
 import './style.scss';
 
 const NavItemTypeToIcon = {
@@ -21,6 +22,7 @@ const NavItem = ({ href, type, color, icon, title, count }) => (
     <Badge className="nav-item__badge" icon={NavItemTypeToIcon[type][icon]} />
     <Text className="nav-item__title">{title}</Text>
     <Text className="nav-item__count">{count}</Text>
+    {type === 'list' && <Icon className="nav-item__chevron" icon={SystemIconNames.chevronRight} />}
   </NavLink>
 );
 

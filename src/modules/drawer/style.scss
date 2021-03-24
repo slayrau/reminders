@@ -5,7 +5,17 @@
   bottom: 0;
 
   width: 100%;
-  background-color: var(--background-secondary);
+  background-color: var(--background-primary);
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--background-separator);
+  }
 
   [data-small-media="true"] & {
     overflow-y: scroll;
@@ -33,7 +43,14 @@
 
 .drawer__filters {
   .collection__list {
-    gap: 8px;
+    [data-small-media="false"] & {
+      gap: 8px;
+    }
+  }
+
+  .nav-item {
+    border-radius: 10px;
+    padding-bottom: 6px;
   }
 }
 
@@ -46,7 +63,7 @@
     overflow: hidden;
 
     .collection__title {
-      border-bottom: 1px solid rgba(#000, 0.1);
+      border-bottom: 1px solid var(--background-separator);
     }
   }
 
@@ -69,6 +86,36 @@
       padding-bottom: 8px;
     }
   }
+
+  .collection__item {
+    .nav-item__title {
+      padding: 0 12px;
+    }
+
+    &:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: calc(var(--icon-size) + 24px);
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background-color: var(--background-separator);
+    }
+
+    &:first-child {
+      .nav-item {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+    }
+    
+    &:last-child {
+      .nav-item {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+    }
+  }
 }
 
 .drawer__footer {
@@ -77,8 +124,8 @@
   bottom: 0;
   margin-bottom: -16px;
   margin-top: -16px;
-  background-color: var(--background-secondary);
-  border-top: 1px solid rgba(#000, 0.1);
+  background-color: var(--background-primary);
+  border-top: 1px solid var(--background-separator);
 }
 
 .drawer__create-list-button {

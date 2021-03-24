@@ -8,21 +8,64 @@
 }
 
 .profile-properties__content {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 32px;
   padding: 16px;
-
-  & > * {
-    margin-bottom: 16px;
-  }
 }
+
+.profile-properties__row {
+}
+
+.profile-properties__caption {
+  padding: 0 16px;
+  padding-bottom: 8px;
+  color: var(--label-color-secondary);
+}
+
+.profile-properties__photo {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: var(--background-secondary);
+  border-bottom: 1px solid var(--background-separator);
+  overflow: hidden;
   
-.profile-properties__container {
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;    
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid var(--background-separator);
+    border-radius: inherit;
+    border-bottom: none;
+  }
+
+  .profile-properties__person-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 25%;
+  }
+
+  & + .bubble-group {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
 }
 
 .profile-properties__photo-controls {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
   .button {
-    padding: 0 16px;
+    padding: 0 8px;
   }
 }
 
@@ -30,6 +73,7 @@
   @extend .text-ellipsis;
 
   width: 100%;
+  outline: none;
 
   &--change-photo {
   }
@@ -44,7 +88,19 @@
   }
   
   &--cancel-chosen {
+  }
 
+  &--theme {
+    padding: 0 16px;
+
+    .headline {
+      margin-right: auto;
+    }
+
+    .profile-properties__icon--checkmark {
+      margin-right: 0 !important;
+      color: var(--system-blue);
+    }
   }
 
   .icon {
@@ -53,32 +109,6 @@
   }
 }
 
-.profile-properties__photo {
-  position: relative;
-  width: 100%;
-  padding-top: 100%;
-  border-radius: 10px;
-  background-color: var(--background-secondary);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  
-  img {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .profile-properties__person-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    height: 50%;
-  }
-}
 
 .profile-properties__fields {
 }
@@ -89,6 +119,8 @@
   width: 100%;
   height: var(--button-size);
   padding: 0 16px;
+  font-size: var(--font-size-headline);
+  color: var(--label-color-primary);
 }
 
 .profile-properties__footer {
@@ -96,7 +128,7 @@
   flex-direction: column;
   justify-content: flex-end;
   margin-bottom: 0;
-  padding-top: 16px;
   margin-top: auto;
+  padding-top: 48px;
 }
 

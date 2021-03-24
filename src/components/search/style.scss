@@ -32,7 +32,7 @@ $padding: 30px;
 
   color: var(--label-color-primary);
   font-size: var(--font-size-body);
-  background-color: #E3E3E9;
+  background-color: var(--background-input);
   border-radius: 10px;
 
   &::placeholder {

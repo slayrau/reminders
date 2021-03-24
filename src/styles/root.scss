@@ -4,9 +4,11 @@
   --icon-size: 24px;
   --container-max-width: 1200px;
 
-  --background-primary: #ffffff;
-  --background-secondary: #f2f2f7;
+  --background-primary: #F2F2F7;
+  --background-secondary: #ffffff;
   --background-tertiary: #f4f4f5;
+  --background-input: #e3e3e9;
+  --background-separator: #c6c6c8;
 
   --font-size-title-1: 24px;
   --font-size-title-2: 20px;
@@ -45,4 +47,21 @@
   --system-brown: #9d8563;
   --system-gray: #5b6770;
   --system-pink: #d9a69f;
+}
+
+[data-theme="dark"]:root {
+  --background-primary: #000000;
+  --background-secondary: #1C1C1E;
+  --background-tertiary: #2A2A2A;
+  --background-quartery: #3C3C3F;
+  --background-input: #1C1C1F;
+  --background-separator: #38383a;
+
+  --label-color-primary: #DDDDDD;
+  --label-color-secondary: #ebebf599;
+  --label-color-tertiary: #ebebf54d;
+  --label-color-quarterly: #ebebf52e;
+}
+
+[data-small-media="true"]:root {
 }

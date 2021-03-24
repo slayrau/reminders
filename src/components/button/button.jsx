@@ -16,7 +16,8 @@ const Button = ({ children, className, type, wide, secondary, ...restProps }) =>
 );
 
 Button.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.element, PropTypes.arrayOf(PropTypes.element)]).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  children: PropTypes.any.isRequired,
   className: PropTypes.string,
   type: PropTypes.oneOf(['button', 'submit']),
   wide: PropTypes.bool,
