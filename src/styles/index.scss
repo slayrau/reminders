@@ -3,6 +3,10 @@
 @import './utils/system-color.scss';
 @import './root.scss';
 
+[data-js-focus-visible] :focus:not([data-focus-visible-added]) {
+  outline: none;
+}
+
 *,
 *::after,
 *::before {

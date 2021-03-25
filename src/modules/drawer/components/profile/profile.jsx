@@ -11,30 +11,32 @@ const Profile = ({ user, updatingInProcess, onEdit }) => {
   const { name, email, photo } = user;
 
   return (
-    <Button
-      className="profile profile__button"
-      onClick={onEdit}
-    >
-      <div className="profile__avatar">
-        {updatingInProcess && (
-          <Icon className="profile__spinner-icon" icon={SystemIconNames.spinner} />
-        )}
-
-        {photo
-          ? (
-            <img src={photo} alt="" />
-          ) : (
-            <Icon className="profile-properties__person-icon" icon={SystemIconNames.personCircle} />
+    <div className="profile">
+      <Button
+        className="profile__button"
+        onClick={onEdit}
+      >
+        <div className="profile__avatar">
+          {updatingInProcess && (
+            <Icon className="profile__spinner-icon" icon={SystemIconNames.spinner} />
           )}
-      </div>
 
-      <div className="profile__info">
-        <Headline title={name}>{name}</Headline>
-        <Caption title={email}>{email}</Caption>
-      </div>
+          {photo
+            ? (
+              <img src={photo} alt="" />
+            ) : (
+              <Icon className="profile-properties__person-icon" icon={SystemIconNames.personCircle} />
+            )}
+        </div>
 
-      <Icon icon={SystemIconNames.chevronRight} />
-    </Button>
+        <div className="profile__info">
+          <Headline title={name}>{name}</Headline>
+          <Caption title={email}>{email}</Caption>
+        </div>
+
+        <Icon icon={SystemIconNames.chevronRight} />
+      </Button>
+    </div>
   );
 };
 

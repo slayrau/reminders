@@ -3,13 +3,20 @@
 .input-picture {
   @extend .text-ellipsis;
 
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: var(--button-size);
   padding: 0 16px;
+  border-radius: 10px;
   cursor: pointer;
+
+  &:focus-within {
+    z-index: 1;
+    box-shadow: 0 0 0 4px var(--system-blue);
+  }
 
   .icon {
     min-width: var(--icon-size);

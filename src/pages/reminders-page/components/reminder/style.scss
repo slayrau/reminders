@@ -1,10 +1,20 @@
 @import 'src/styles/utils/extends.scss';
+@import 'src/styles/utils/mixins.scss';
 
 $button-size: 36px;
 
 .reminder {
   padding: 8px;
-  border-bottom: 1px solid var(--background-separator);
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: calc(8px + 36px + 8px);
+    right: 0;
+    height: 1px;
+    background-color: var(--background-separator);
+  }
 
   &--completed {
     .text {
@@ -23,11 +33,12 @@ $button-size: 36px;
 .reminder__left {}
 
 .reminder__checkbox {
+  @include styled-outline;
+
   width: $button-size;
   height: $button-size;
   min-width: $button-size;
   min-height: $button-size;
-
   border-radius: 50%;
 
   .reminders-page &--checked {
@@ -62,6 +73,7 @@ $button-size: 36px;
 
 .reminder__textarea {
   @extend .reset-input;
+  @include styled-outline;
 
   display: flex;
   align-items: center;
@@ -75,6 +87,11 @@ $button-size: 36px;
   box-sizing: content-box;
   border-radius: 8px;
   resize: none;
+  outline: none;
+  
+  &::placeholder {
+    color: var(--label-color-tertiary);
+  }
 }
 
 .reminder__controls {
@@ -86,7 +103,8 @@ $button-size: 36px;
 }
 
 .reminder__control-button {
-  padding-left: 4px;
+  min-width: 36px;
+  min-height: 36px;
 
   &--done {
     color: var(--system-blue);
@@ -99,9 +117,5 @@ $button-size: 36px;
   &--remove {
     margin-left: auto;
     color: var(--system-red);
-  }
-
-  .icon {
-    margin-right: 8px;
   }
 }

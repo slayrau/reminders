@@ -10,17 +10,17 @@
   border-radius: 50%;
   cursor: pointer;
 
+  &:focus-within {
+    box-shadow: 0 0 0 4px var(--background-primary), 0 0 0 8px var(--system-blue);
+  }
+
   &--color {
     padding-top: 100%;
     background-color: currentColor;
   }
   
   &--checked {
-    box-shadow: 0 0 0 4px var(--background-primary), 0 0 0 8px var(--label-color-tertiary);
-    
-    &:focus-within {
-      box-shadow: 0 0 0 4px var(--background-primary), 0 0 0 8px var(--label-color-primary);
-    }
+    box-shadow: 0 0 0 4px var(--background-primary), 0 0 0 8px var(--label-color-primary);
   }
 
   .badge {

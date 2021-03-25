@@ -46,62 +46,62 @@ const Drawer = () => {
 
   return (
     <div className="drawer">
-      <div className="drawer__container">
-        <div className="drawer__body">
-          <Profile
-            user={authUserData}
-            onEdit={handleEdit}
-            updatingInProcess={dataUpdating || photoUpdating}
-          />
+      <div className="drawer__header">
+        <Profile
+          user={authUserData}
+          onEdit={handleEdit}
+          updatingInProcess={dataUpdating || photoUpdating}
+        />
 
-          <Search />
+        <Search />
 
-          <Collection
-            className="drawer__filters"
-            columns="2"
-            title="Filters"
-            titleHidden
-          >
-            {Object.values(FILTERS).map((filter) => (
-              <NavItem
-                key={filter.id}
-                href={`/filter/${filter.id}`}
-                type="filter"
-                color={filter.color}
-                icon={filter.icon}
-                title={filter.title}
-                count={0}
-              />
-            ))}
-          </Collection>
+        <Collection
+          className="drawer__filters"
+          columns="2"
+          title="Filters"
+          titleHidden
+        >
+          {Object.values(FILTERS).map((filter) => (
+            <NavItem
+              key={filter.id}
+              href={`/filter/${filter.id}`}
+              type="filter"
+              color={filter.color}
+              icon={filter.icon}
+              title={filter.title}
+              count={0}
+            />
+          ))}
+        </Collection>
+      </div>
 
-          <Collection
-            className="drawer__user-lists"
-            title="My Lists"
-          >
-            {userLists.map((list) => (
-              <NavItem
-                key={list.id}
-                href={`/list/${list.id}`}
-                type="list"
-                color={list.color}
-                icon={list.icon}
-                title={list.title}
-                count={list.reminderIds?.length || 0}
-              />
-            ))}
-          </Collection>
+      <div className="drawer__body">
+        <Collection
+          className="drawer__user-lists"
+          title="My Lists"
+        >
+          {userLists.map((list) => (
+            <NavItem
+              key={list.id}
+              href={`/list/${list.id}`}
+              type="list"
+              color={list.color}
+              icon={list.icon}
+              title={list.title}
+              count={list.reminderIds?.length || 0}
+            />
+          ))}
+        </Collection>
+      </div>
 
-          <div className="drawer__footer">
-            <Button
-              className="drawer__create-list-button"
-              onClick={handleCreateNewList}
-            >
-              <Icon icon={SystemIconNames.plusCircleOutline} />
-              <Text>Create new list</Text>
-            </Button>
-          </div>
-        </div>
+      <div className="drawer__footer">
+        <Button
+          className="drawer__create-list-button"
+          onClick={handleCreateNewList}
+        >
+          <Icon icon={SystemIconNames.plusCircleOutline} />
+          <Text>Create new list</Text>
+        </Button>
       </div>
     </div>
   );

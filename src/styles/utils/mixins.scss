@@ -1,0 +1,11 @@
+@mixin styled-outline($type: false) {
+  @if ($type) {
+    &[data-focus-visible-added] {
+      box-shadow: $type 0 0 0 4px var(--system-blue);
+    }
+  } @else {
+    &[data-focus-visible-added] {
+      box-shadow: 0 0 0 4px var(--system-blue);
+    }
+  }
+}

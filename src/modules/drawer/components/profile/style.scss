@@ -11,10 +11,13 @@
 }
 
 .profile {
+  padding: 16px;
+  padding-bottom: 8px;
 }
 
 .profile__button {
   padding: 0;
+  width: 100%;
 }
 
 .profile__avatar {
@@ -24,7 +27,7 @@
   height: var(--button-size);
   object-fit: cover;
   border-radius: 50%;
-  background-color: var(--background-primary);
+  background-color: var(--background-secondary);
   border: 1px solid var(--background-separator);
   overflow: hidden;
 

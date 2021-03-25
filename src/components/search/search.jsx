@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import classNames from 'classnames';
 
 import { SystemIconNames } from 'src/utils/const';
 import Icon from 'src/components/icon';
@@ -17,8 +18,12 @@ const Search = () => {
   };
 
   return (
-    <div className="search">
-      <label htmlFor="search__label" aria-label="Search reminders">
+    <div
+      className={classNames('search', {
+        'search--empty': !value,
+      })}
+    >
+      <label className="search__label" aria-label="Search reminders">
         <Icon className="search__icon search__icon--search" icon={SystemIconNames.search} />
         <input
           className="search__input"
@@ -30,16 +35,16 @@ const Search = () => {
           autoComplete="off"
           spellCheck="false"
         />
-      </label>
 
-      {value && (
-        <IconButton
-          className="search__clear-button"
-          icon={SystemIconNames.xmarkCircleFilled}
-          onClick={handleClearClick}
-          aria-label="Cancel search"
-        />
-      )}
+        {value && (
+          <IconButton
+            className="search__clear-button"
+            icon={SystemIconNames.xmarkCircleFilled}
+            onClick={handleClearClick}
+            aria-label="Cancel search"
+          />
+        )}
+      </label>
     </div>
   );
 };

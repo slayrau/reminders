@@ -1,13 +1,17 @@
 @import 'src/styles/utils/extends.scss';
+@import 'src/styles/utils/mixins.scss';
 
 .button {
   @extend .reset-button;
+  @include styled-outline;
 
+  position: relative;
   min-height: var(--button-size);
   min-width: var(--button-size);
-  padding: 0 8px;
+  padding: 0 16px;
   color: var(--label-color-primary);
-  border-radius: 6px;
+  border-radius: 10px;
+  outline: none;
   cursor: pointer;
 
   &:hover {

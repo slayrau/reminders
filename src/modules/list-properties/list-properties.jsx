@@ -1,8 +1,10 @@
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import classNames from 'classnames';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 // UTILS
 import { Colors, BadgeIcons, SystemIconNames } from 'src/utils/const';
@@ -14,9 +16,9 @@ import Operation from 'src/redux/operations/user-lists';
 
 // COMPONENTS
 import Modal from 'src/components/modal';
+import ModalHeader from 'src/components/modal/header';
 import Badge from 'src/components/badge';
 import Collection from 'src/components/collection';
-import Bubble from 'src/components/bubble';
 import Button from 'src/components/button';
 import Icon from 'src/components/icon';
 
@@ -25,6 +27,7 @@ import BadgeRadio from './components/badge-radio';
 import './style.scss';
 
 const ListProperties = () => {
+  const listPropertiesScrollRef = useRef();
   const history = useHistory();
   const dispatch = useDispatch();
   const properties = useSelector(Selector.listProperties);
@@ -57,6 +60,13 @@ const ListProperties = () => {
     }));
   };
 
+  useEffect(() => {
+    const scroll = listPropertiesScrollRef.current;
+
+    disableBodyScroll(scroll);
+    return () => enableBodyScroll(scroll);
+  }, []);
+
   return (
     <Formik
       initialValues={{
@@ -69,37 +79,37 @@ const ListProperties = () => {
         title: Yup.string().required('List title is reqired'),
       })}
       onSubmit={handleSubmit}
-      validateOnBlur={false}
-      validateOnChange={false}
     >
       {({ values, errors, touched, handleChange, handleBlur }) => (
-        <Form className="list-properties__form">
-          <Modal
-            header
-            onCancel={handleCancel}
-            title={properties.title}
-            style={{ height: '100%' }}
-          >
-            <section className="list-properties">
-              <div className="list-properties__header">
-                <Badge icon={values.icon} color={values.color} />
+        <Form>
+          <div className="list-properties">
+            <Modal style={{ height: '100%' }}>
+              <ModalHeader
+                title={properties.title}
+                onCancel={handleCancel}
+              >
+                <div className="list-properties__header">
+                  <Badge icon={values.icon} color={values.color} />
 
-                <Field
-                  className={classNames('list-properties__input', `system-color--${values.color}`)}
-                  name="title"
-                  autoComplete="off"
-                  spellCheck="false"
-                />
+                  <Field
+                    className={classNames('list-properties__input', `system-color--${values.color}`, {
+                      'list-properties__input--error': errors.title && touched.title,
+                    })}
+                    name="title"
+                    autoComplete="off"
+                    spellCheck="false"
+                    placeholder="List name"
+                  />
 
-                {errors.title && touched.title && (
-                  <div className="list-properties__error-message">{errors.title}</div>
-                )}
-              </div>
+                  {errors.title && touched.title && (
+                    <div className="list-properties__error-message">{errors.title}</div>
+                  )}
+                </div>
+              </ModalHeader>
 
-              <div className="list-properties__divider" />
-
-              <div className="list-properties__body">
+              <div className="list-properties__body" ref={listPropertiesScrollRef}>
                 <Collection
+                  className="list-properties__colors"
                   columns="6"
                   title="Badge colors"
                   titleHidden
@@ -119,6 +129,7 @@ const ListProperties = () => {
                 </Collection>
 
                 <Collection
+                  className="list-properties__badges"
                   columns="6"
                   title="Badge icons"
                   titleHidden
@@ -140,19 +151,17 @@ const ListProperties = () => {
 
               {properties.id !== 'NEW_LIST' && (
                 <div className="list-properties__footer">
-                  <Bubble>
-                    <Button
-                      className="list-properties__remove-list-button"
-                      onClick={handleRemoveList}
-                    >
-                      <Icon icon={SystemIconNames.trash} />
-                      Remove list
-                    </Button>
-                  </Bubble>
+                  <Button
+                    className="list-properties__remove-list-button"
+                    onClick={handleRemoveList}
+                  >
+                    <Icon icon={SystemIconNames.trash} />
+                    Remove list
+                  </Button>
                 </div>
               )}
-            </section>
-          </Modal>
+            </Modal>
+          </div>
         </Form>
       )}
     </Formik>

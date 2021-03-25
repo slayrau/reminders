@@ -1,4 +1,5 @@
 @import 'src/styles/utils/extends.scss';
+@import 'src/styles/utils/mixins.scss';
 
 .auth-page {
   height: 100%;
@@ -46,11 +47,23 @@
 
 .auth-page__input {
   @extend .reset-input;
+  @include styled-outline;
 
+  position: relative;
   height: var(--button-size);
   width: 100%;
   padding: 0 16px;
   border-radius: inherit;
+  outline: none;
+  color: #fff;
+  
+  &::placeholder {
+    color: var(--label-color-tertiary);
+  }
+
+  &:focus {
+    z-index: 1;
+  }
 
   &--error {
     color: var(--system-red);
@@ -95,6 +108,11 @@
   border-radius: 10px;
   height: var(--button-size);
   cursor: pointer;
+  outline: none;
+
+  &[data-focus-visible-added] {
+    box-shadow: 0 0 0 4px var(--background-primary), 0 0 0 8px var(--system-blue);
+  }
 }
 
 .auth-page__form-footer {
@@ -104,11 +122,14 @@
 }
 
 .auth-page__screen-link {
+  @include styled-outline;
+
   display: block;
   margin: 0 auto;
   color: var(--system-blue);
   text-decoration: none;
-  
+  outline: none;
+
   &:hover {
     text-decoration: underline;
   }

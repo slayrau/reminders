@@ -7,7 +7,8 @@ import classNames from 'classnames';
 
 // UTILS
 import { AuthPageTypes } from 'src/utils/const';
-import authBackgroundImg from 'src/assets/images/auth-background.jpg';
+import authBackgroundLightImg from 'src/assets/images/auth-background-light.jpg';
+import authBackgroundDarkImg from 'src/assets/images/auth-background-dark.jpg';
 
 // REDUX
 import AuthOperation from 'src/redux/operations/auth';
@@ -21,6 +22,11 @@ import Button from 'src/components/button';
 import BubbleGroup from 'src/components/bubble/group';
 
 import './style.scss';
+
+const Background = {
+  light: authBackgroundLightImg,
+  dark: authBackgroundDarkImg,
+};
 
 const AuthPage = () => {
   const dispatch = useDispatch();
@@ -36,14 +42,13 @@ const AuthPage = () => {
   };
 
   useEffect(() => {
-    document.documentElement.style.backgroundImage = `url(${authBackgroundImg})`;
-    document.body.style.backdropFilter = 'blur(50px)';
+    const themeType = document.documentElement.getAttribute('data-theme');
+    document.documentElement.style.backgroundImage = `url(${Background[themeType] || Background.light})`;
 
     return () => {
       document.documentElement.style.backgroundImage = '';
-      document.body.style.backdropFilter = '';
     };
-  }, []);
+  });
 
   return (
     <Formik

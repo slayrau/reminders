@@ -1,11 +1,19 @@
 @import '/src/styles/utils/extends.scss';
+@import '/src/styles/utils/mixins.scss';
 
 .nav-item {
+  @include styled-outline;
+
   position: relative;
   align-items: center;
   font-size: var(--font-size-body);
   text-decoration: none;
   background-color: var(--background-secondary);
+  outline: none;
+
+  &:focus {
+    z-index: 1;
+  }  
 
   [data-small-media="true"] & {
     .badge {
@@ -50,6 +58,10 @@
     [data-small-media="false"] & {
       height: var(--button-size);
       padding-right: 4px;
+    }
+
+    .badge {
+      margin-right: 12px;
     }
   }
 

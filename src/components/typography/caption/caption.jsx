@@ -3,9 +3,9 @@ import classNames from 'classnames';
 
 import './style.scss';
 
-const Caption = ({ level, weight, caps, children, ...restProps }) => (
+const Caption = ({ children, level, weight, caps, className, ...restProps }) => (
   <div
-    className={classNames('caption', `caption--level-${level}`, `caption--weight-${weight}`, {
+    className={classNames('caption', `caption--level-${level}`, `caption--weight-${weight}`, className, {
       'caption--caps': caps,
     })}
     {...restProps}
@@ -15,16 +15,18 @@ const Caption = ({ level, weight, caps, children, ...restProps }) => (
 );
 
 Caption.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   level: PropTypes.oneOf(['1', '2', '3', '4']),
   weight: PropTypes.oneOf(['regular', 'bold']),
   caps: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  className: PropTypes.string,
 };
 
 Caption.defaultProps = {
   level: '1',
   weight: 'regular',
   caps: false,
+  className: '',
 };
 
 export default Caption;
