@@ -1,20 +1,15 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Field, Formik, Form } from 'formik';
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 // UTILS
 import { SystemIconNames } from 'src/utils/const/icons';
 import { Theme } from 'src/utils/const';
 
+// HOOKS
+import useProfileProperties from 'src/hooks/use-profile-properties';
+
 // CONTEXT
 import { useThemeContext } from 'src/contexts/theme';
-
-// REDUX
-import ProfileParamsActionCreator from 'src/redux/actions/profile-properties';
-import AuthOperation from 'src/redux/operations/auth';
-import AuthSelector from 'src/redux/selectors/auth';
 
 // COMPONENTS
 import Modal from 'src/components/modal';
@@ -31,67 +26,22 @@ import InputPicture from './components/input-picture';
 import './style.scss';
 
 const ProfileProperties = () => {
-  const [filePicture, setFilePicture] = useState(null);
-  const [reqestToRemovePhoto, setRequestToRemovePhoto] = useState(false);
+  const {
+    name,
+    email,
+    photo,
+    blobPicture,
+    orginalPicture,
+    profilePropertiesRef,
+    setFilePicture,
+    handleRemovePhoto,
+    handleCancelSelectPhoto,
+    handleCancelModal,
+    handleSubmit,
+    handleSignOut,
+  } = useProfileProperties();
+
   const { themeId, setTheme } = useThemeContext();
-  const profilePropertiesRef = useRef();
-
-  const dispatch = useDispatch();
-  const { name, email, photo } = useSelector(AuthSelector.authData);
-  const blobPicture = filePicture ? URL.createObjectURL(filePicture) : '';
-  const orginalPicture = reqestToRemovePhoto ? null : photo;
-
-  const cleanUpBlob = () => URL.revokeObjectURL(blobPicture);
-
-  const handleCancelModal = () => {
-    dispatch(ProfileParamsActionCreator.closeProfile());
-  };
-
-  const handleSubmit = (values) => {
-    if (reqestToRemovePhoto && !filePicture) {
-      dispatch(AuthOperation.removePhoto());
-    }
-
-    if (filePicture) {
-      dispatch(AuthOperation.updatePhoto(filePicture));
-    }
-
-    if (values.name !== name || values.email !== email) {
-      dispatch(AuthOperation.updateProfile({
-        name: values.name,
-        email: values.email,
-      }));
-    }
-
-    dispatch(ProfileParamsActionCreator.closeProfile());
-  };
-
-  const handleSignOut = () => {
-    dispatch(AuthOperation.signOut());
-  };
-
-  const handleRemovePhoto = () => {
-    setRequestToRemovePhoto(true);
-  };
-
-  const handleCancelSelect = () => {
-    setFilePicture(null);
-    cleanUpBlob();
-  };
-
-  useEffect(() => {
-    return () => {
-      cleanUpBlob();
-      dispatch(ProfileParamsActionCreator.closeProfile());
-    };
-  }, []);
-
-  useEffect(() => {
-    const ref = profilePropertiesRef.current;
-
-    disableBodyScroll(ref);
-    return () => enableBodyScroll(ref);
-  }, []);
 
   return (
     <Formik
@@ -141,7 +91,7 @@ const ProfileProperties = () => {
                   )) : (
                     <Button
                       className="profile-properties__button profile-properties__button--cancel-selected"
-                      onClick={handleCancelSelect}
+                      onClick={handleCancelSelectPhoto}
                       type="button"
                       aria-label="Cancel selected photo"
                     >

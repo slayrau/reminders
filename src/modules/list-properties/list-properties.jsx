@@ -1,6 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import classNames from 'classnames';
@@ -9,10 +7,8 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 // UTILS
 import { Colors, BadgeIcons, SystemIconNames } from 'src/utils/const';
 
-// REDUX
-import Selector from 'src/redux/selectors/list-properties';
-import ActionCreator from 'src/redux/actions/list-properties';
-import Operation from 'src/redux/operations/user-lists';
+// HOOKS
+import useListProperties from 'src/hooks/use-list-properties';
 
 // COMPONENTS
 import Modal from 'src/components/modal';
@@ -27,38 +23,14 @@ import BadgeRadio from './components/badge-radio';
 import './style.scss';
 
 const ListProperties = () => {
+  const {
+    properties,
+    handleCancel,
+    handleSubmit,
+    handleRemoveList,
+  } = useListProperties();
+
   const listPropertiesScrollRef = useRef();
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const properties = useSelector(Selector.listProperties);
-
-  const handleCancel = () => {
-    dispatch(ActionCreator.closeList());
-  };
-
-  const handleSubmit = ({ id, title, color, icon }) => {
-    if (id === 'NEW_LIST') {
-      dispatch(Operation.createList({
-        title,
-        color,
-        icon,
-      }, (listId) => history.push(`/list/${listId}`)));
-    } else {
-      dispatch(Operation.updateList({
-        id,
-        title,
-        color,
-        icon,
-      }));
-    }
-  };
-
-  const handleRemoveList = () => {
-    dispatch(Operation.removeList({
-      id: properties.id,
-      history,
-    }));
-  };
 
   useEffect(() => {
     const scroll = listPropertiesScrollRef.current;
@@ -83,7 +55,7 @@ const ListProperties = () => {
       {({ values, errors, touched, handleChange, handleBlur }) => (
         <Form>
           <div className="list-properties">
-            <Modal style={{ height: '100%' }}>
+            <Modal>
               <ModalHeader
                 title={properties.title}
                 onCancel={handleCancel}
