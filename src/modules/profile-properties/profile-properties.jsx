@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
+import { useEffect, useRef } from 'react';
 import { Field, Formik, Form } from 'formik';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 // UTILS
 import { SystemIconNames } from 'src/utils/const/icons';
@@ -7,6 +9,8 @@ import { Theme } from 'src/utils/const';
 
 // HOOKS
 import useProfileProperties from 'src/hooks/use-profile-properties';
+import useKeyDown from 'src/hooks/use-key-down';
+import useOutsideClick from 'src/hooks/use-outside-click';
 
 // CONTEXT
 import { useThemeContext } from 'src/contexts/theme';
@@ -26,13 +30,16 @@ import InputPicture from './components/input-picture';
 import './style.scss';
 
 const ProfileProperties = () => {
+  const escapeKeyDowned = useKeyDown('Escape');
+  const profilePropertiesScrollRef = useRef();
+  const profilePropertiesModalRef = useRef();
+  const { themeId, setTheme } = useThemeContext();
   const {
     name,
     email,
     photo,
     blobPicture,
     orginalPicture,
-    profilePropertiesRef,
     setFilePicture,
     handleRemovePhoto,
     handleCancelSelectPhoto,
@@ -41,7 +48,20 @@ const ProfileProperties = () => {
     handleSignOut,
   } = useProfileProperties();
 
-  const { themeId, setTheme } = useThemeContext();
+  useEffect(() => {
+    if (escapeKeyDowned) {
+      handleCancelModal();
+    }
+  }, [escapeKeyDowned, handleCancelModal]);
+
+  useEffect(() => {
+    const ref = profilePropertiesScrollRef.current;
+
+    disableBodyScroll(ref);
+    return () => enableBodyScroll(ref);
+  }, []);
+
+  useOutsideClick(profilePropertiesModalRef, handleCancelModal);
 
   return (
     <Formik
@@ -54,12 +74,12 @@ const ProfileProperties = () => {
       title="Profile properties"
     >
       <Form>
-        <Modal>
+        <Modal style={{ height: 'calc(100% - 40px)' }} targetRef={profilePropertiesModalRef}>
           <ModalHeader
             title="Profile properties"
             onCancel={handleCancelModal}
           />
-          <div className="profile-properties" ref={profilePropertiesRef}>
+          <div className="profile-properties" ref={profilePropertiesScrollRef}>
 
             <div className="profile-properties__row">
               <div className="profile-properties__photo">

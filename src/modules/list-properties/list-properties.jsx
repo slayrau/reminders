@@ -9,6 +9,8 @@ import { Colors, BadgeIcons, SystemIconNames } from 'src/utils/const';
 
 // HOOKS
 import useListProperties from 'src/hooks/use-list-properties';
+import useKeyDown from 'src/hooks/use-key-down';
+import useOutsideClick from 'src/hooks/use-outside-click';
 
 // COMPONENTS
 import Modal from 'src/components/modal';
@@ -23,6 +25,9 @@ import BadgeRadio from './components/badge-radio';
 import './style.scss';
 
 const ListProperties = () => {
+  const escapeKeyDowned = useKeyDown('Escape');
+  const listPropertiesModalRef = useRef();
+  const listPropertiesScrollRef = useRef();
   const {
     properties,
     handleCancel,
@@ -30,14 +35,20 @@ const ListProperties = () => {
     handleRemoveList,
   } = useListProperties();
 
-  const listPropertiesScrollRef = useRef();
-
   useEffect(() => {
     const scroll = listPropertiesScrollRef.current;
 
     disableBodyScroll(scroll);
     return () => enableBodyScroll(scroll);
   }, []);
+
+  useEffect(() => {
+    if (escapeKeyDowned) {
+      handleCancel();
+    }
+  }, [escapeKeyDowned, handleCancel]);
+
+  useOutsideClick(listPropertiesModalRef, handleCancel);
 
   return (
     <Formik
@@ -54,8 +65,8 @@ const ListProperties = () => {
     >
       {({ values, errors, touched, handleChange, handleBlur }) => (
         <Form>
-          <div className="list-properties">
-            <Modal>
+          <Modal style={{ height: 'calc(100% - 40px)' }} targetRef={listPropertiesModalRef}>
+            <div className="list-properties">
               <ModalHeader
                 title={properties.title}
                 onCancel={handleCancel}
@@ -132,8 +143,8 @@ const ListProperties = () => {
                   </Button>
                 </div>
               )}
-            </Modal>
-          </div>
+            </div>
+          </Modal>
         </Form>
       )}
     </Formik>

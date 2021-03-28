@@ -1,16 +1,13 @@
-import { useRef } from 'react';
 import ReactFocusLock from 'react-focus-lock';
 import PropTypes from 'prop-types';
 
 import './style.scss';
 
-const Modal = ({ children, ...restProps }) => {
-  const modalRef = useRef();
-
+const Modal = ({ children, targetRef, ...restProps }) => {
   return (
     <ReactFocusLock>
       <div className="modal-wrapper">
-        <div className="modal" {...restProps} ref={modalRef}>
+        <div className="modal" {...restProps} ref={targetRef}>
           {children}
         </div>
       </div>
@@ -21,6 +18,8 @@ const Modal = ({ children, ...restProps }) => {
 Modal.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   children: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  targetRef: PropTypes.any.isRequired,
 };
 
 export default Modal;

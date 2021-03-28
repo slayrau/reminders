@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 // REDUX
 import ProfileParamsActionCreator from 'src/redux/actions/profile-properties';
@@ -10,7 +9,6 @@ import AuthSelector from 'src/redux/selectors/auth';
 const useProfileProperties = () => {
   const [filePicture, setFilePicture] = useState(null);
   const [reqestToRemovePhoto, setRequestToRemovePhoto] = useState(false);
-  const profilePropertiesRef = useRef();
 
   const dispatch = useDispatch();
   const { name, email, photo } = useSelector(AuthSelector.authData);
@@ -63,20 +61,12 @@ const useProfileProperties = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const ref = profilePropertiesRef.current;
-
-    disableBodyScroll(ref);
-    return () => enableBodyScroll(ref);
-  }, []);
-
   return {
     name,
     email,
     photo,
     blobPicture,
     orginalPicture,
-    profilePropertiesRef,
     setFilePicture,
     handleCancelModal,
     handleSubmit,

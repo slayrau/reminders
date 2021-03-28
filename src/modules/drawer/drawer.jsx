@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // UTILS
-import { FILTERS } from 'src/utils/settings';
 import { SystemIconNames } from 'src/utils/const';
 
 // REUDX
@@ -13,7 +12,6 @@ import UserListsSelector from 'src/redux/selectors/user-lists';
 import UserListsOperation from 'src/redux/operations/user-lists';
 
 // COMPONENTS
-import Search from 'src/components/search';
 import NavItem from 'src/components/nav-item';
 import Collection from 'src/components/collection';
 import Button from 'src/components/button';
@@ -52,27 +50,6 @@ const Drawer = () => {
           onEdit={handleEdit}
           updatingInProcess={dataUpdating || photoUpdating}
         />
-
-        <Search />
-
-        <Collection
-          className="drawer__filters"
-          columns="2"
-          title="Filters"
-          titleHidden
-        >
-          {Object.values(FILTERS).map((filter) => (
-            <NavItem
-              key={filter.id}
-              href={`/filter/${filter.id}`}
-              type="filter"
-              color={filter.color}
-              icon={filter.icon}
-              title={filter.title}
-              count={0}
-            />
-          ))}
-        </Collection>
       </div>
 
       <div className="drawer__body">

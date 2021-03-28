@@ -2,8 +2,9 @@
 @import '/src/styles/utils/mixins.scss';
 
 .list-properties {
-  overflow-y: scroll;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .list-properties__header {
