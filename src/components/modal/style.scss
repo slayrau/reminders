@@ -8,30 +8,32 @@
   bottom: 0;
   z-index: 10;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
   backdrop-filter: blur(16px);
 }
 
 .modal {
-  position: fixed;
   display: flex;
   flex-direction: column;
+  width: 100%;
   background-color: var(--background-primary);
+  overflow: hidden;
 
   [data-small-media="true"] & {
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    height: 100%;
   }
 
   [data-small-media="false"] & {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
+    max-width: 400px;
     max-height: 800px;
     border: 1px solid var(--background-separator);
     border-radius: 10px;
     box-shadow: 0 8px 32px rgba(#000, 0.1);
+  }
+
+  &--full-height {
+    height: calc(100% - 120px);
   }
 }

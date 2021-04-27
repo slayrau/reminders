@@ -73,6 +73,15 @@
       opacity: 0.5;
     }
   }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover, 
+  &:-webkit-autofill:focus, 
+  &:-webkit-autofill:active {
+    font-size: var(--font-size-body);
+    -webkit-text-fill-color: var(--label-color-primary);
+    transition: background-color 5000s ease-in-out 0s;
+  }
 }
 
 .auth-page__form-errors {
@@ -98,6 +107,11 @@
   }
 }
 
+.auth-page__auth-error {
+  margin: 0;
+  color: var(--system-red);
+}
+
 .auth-page__controls {
   margin-top: 20px;
 }
@@ -111,7 +125,7 @@
   outline: none;
 
   &[data-focus-visible-added] {
-    box-shadow: 0 0 0 4px var(--background-primary), 0 0 0 8px var(--system-blue);
+    box-shadow: 0 0 0 4px var(--system-blue), inset 0 0 0 4px var(--background-primary);
   }
 }
 

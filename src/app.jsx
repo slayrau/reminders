@@ -2,9 +2,6 @@ import { useEffect } from 'react';
 import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-// UTILS
-import { AuthPageTypes } from 'src/utils/const';
-
 // CONTEXT
 import { useMediaContext } from 'src/contexts/media';
 
@@ -15,7 +12,8 @@ import ListPropertiesSelector from 'src/redux/selectors/list-properties';
 import ProfilePropertiesSelector from 'src/redux/selectors/profile-properties';
 
 // PAGES
-import AuthPage from 'src/pages/auth-page';
+import SignInPage from 'src/pages/sign-in-page';
+import SignUpPage from 'src/pages/sign-up-page';
 import RemindersPage from 'src/pages/reminders-page';
 
 // MODULES
@@ -35,13 +33,15 @@ const App = () => {
 
   useEffect(() => {
     dispatch(AuthOperation.checkUserSigned());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!userAuthorized) {
     return (
       <Switch>
-        <Route path={[`/${AuthPageTypes.signIn}`, `/${AuthPageTypes.signUp}`]} component={AuthPage} />
-        <Redirect to={`/${AuthPageTypes.signIn}`} />
+        <Route path="/sign-in" component={SignInPage} />
+        <Route path="/sign-up" component={SignUpPage} />
+        <Redirect to="/sign-in" />
       </Switch>
     );
   }

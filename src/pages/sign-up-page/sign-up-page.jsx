@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useRouteMatch } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import classNames from 'classnames';
@@ -21,24 +21,20 @@ import Text from 'src/components/typography/text';
 import Button from 'src/components/button';
 import BubbleGroup from 'src/components/bubble/group';
 
-import './style.scss';
+import 'src/styles/common/auth-page.scss';
 
 const Background = {
   light: authBackgroundLightImg,
   dark: authBackgroundDarkImg,
 };
 
-const AuthPage = () => {
+const SignUpPage = () => {
   const dispatch = useDispatch();
   const authLoading = useSelector(AuthSelector.authLoading);
-  const match = useRouteMatch('/:type');
-  const authType = match.params.type;
-  const isSignUpType = authType === AuthPageTypes.signUp;
-  const isSignInType = authType === AuthPageTypes.signIn;
+  const error = useSelector(AuthSelector.error);
 
   const handleSubmit = ({ email, password }) => {
-    if (authType === AuthPageTypes.signIn) dispatch(AuthOperation.signIn({ email, password }));
-    if (authType === AuthPageTypes.signUp) dispatch(AuthOperation.signUp({ email, password }));
+    dispatch(AuthOperation.signUp({ email, password }));
   };
 
   useEffect(() => {
@@ -60,7 +56,7 @@ const AuthPage = () => {
       validationSchema={Yup.object({
         email: Yup.string().email('Invalid email').required('Email is required'),
         password: Yup.string().min(6, 'Password is to short. Min length 6 symbols').required('Password is required'),
-        confirmPassword: authType === AuthPageTypes.signUp && Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Confirm passwords is required'),
+        confirmPassword: AuthPageTypes.signUp && Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Confirm passwords is required'),
       })}
       onSubmit={handleSubmit}
     >
@@ -71,8 +67,7 @@ const AuthPage = () => {
             <Modal>
               <div className="auth-page__form-header">
                 <Title level="1" weight="bold">Reminders</Title>
-                {isSignInType && <Text>Sign in with your email and password.</Text>}
-                {isSignUpType && <Text>Create an account to use Reminders.</Text>}
+                <Text>Create an account to use Reminders.</Text>
               </div>
 
               <div className="auth-page__form-body">
@@ -94,42 +89,35 @@ const AuthPage = () => {
                     type="password"
                     name="password"
                     placeholder="Password"
-                    autoComplete={isSignInType ? 'password' : 'new-password'}
+                    autoComplete="new-password"
                   />
 
-                  {authType === AuthPageTypes.signUp && (
-                    <Field
-                      className={classNames('auth-page__input', {
-                        'auth-page__input--error': touched.confirmPassword && errors.confirmPassword,
-                      })}
-                      type="password"
-                      name="confirmPassword"
-                      placeholder="Confirm password"
-                      autoComplete="new-password"
-                    />
-                  )}
+                  <Field
+                    className={classNames('auth-page__input', {
+                      'auth-page__input--error': touched.confirmPassword && errors.confirmPassword,
+                    })}
+                    type="password"
+                    name="confirmPassword"
+                    placeholder="Confirm password"
+                    autoComplete="new-password"
+                  />
                 </BubbleGroup>
 
-                <div className="auth-page__form-errors">
-                  <ul className="auth-page__errors-list">
-                    {Object.keys(errors)
-                      // eslint-disable-next-line array-callback-return
-                      .filter((err) => {
-                        if (isSignInType) {
-                          return err !== 'confirmPassword' && touched[err] && errors[err];
-                        }
+                {!!Object.keys(errors).length && (
+                  <div className="auth-page__form-errors">
+                    <ul className="auth-page__errors-list">
+                      {Object.keys(errors)
+                        .filter((err) => touched[err] && errors[err])
+                        .map((err) => (
+                          <li className="auth-page__errors-item" key={err}>
+                            {errors[err]}
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                )}
 
-                        if (isSignUpType) {
-                          return touched[err] && errors[err];
-                        }
-                      })
-                      .map((err) => (
-                        <li className="auth-page__errors-item" key={err}>
-                          {errors[err]}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
+                {error && <p className="auth-page__auth-error">{error.message}</p>}
 
                 <div className="auth-page__form-controls">
                   <Button
@@ -144,25 +132,13 @@ const AuthPage = () => {
               </div>
 
               <div className="auth-page__form-footer">
-                {authType === AuthPageTypes.signIn && (
-                  <NavLink
-                    className="auth-page__screen-link"
-                    to={`/${AuthPageTypes.signUp}`}
-                    onClick={resetForm}
-                  >
-                    Don&#39;t have an acount? Create one.
-                  </NavLink>
-                )}
-
-                {authType === AuthPageTypes.signUp && (
-                  <NavLink
-                    className="auth-page__screen-link"
-                    to={`/${AuthPageTypes.signIn}`}
-                    onClick={resetForm}
-                  >
-                    Already have an account? Sign In.
-                  </NavLink>
-                )}
+                <NavLink
+                  className="auth-page__screen-link"
+                  to={`/${AuthPageTypes.signIn}`}
+                  onClick={resetForm}
+                >
+                  Already have an account? Sign In.
+                </NavLink>
               </div>
             </Modal>
           </Form>
@@ -173,4 +149,4 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default SignUpPage;

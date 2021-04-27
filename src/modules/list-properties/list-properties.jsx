@@ -65,7 +65,7 @@ const ListProperties = () => {
     >
       {({ values, errors, touched, handleChange, handleBlur }) => (
         <Form>
-          <Modal style={{ height: 'calc(100% - 40px)' }} targetRef={listPropertiesModalRef}>
+          <Modal targetRef={listPropertiesModalRef} fullHeight>
             <div className="list-properties">
               <ModalHeader
                 title={properties.title}

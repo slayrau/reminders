@@ -50,6 +50,8 @@
 }
 
 [data-theme="dark"]:root {
+  color-scheme: dark;
+
   --background-primary: #000000;
   --background-secondary: #1C1C1E;
   --background-tertiary: #2A2A2A;

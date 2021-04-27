@@ -74,7 +74,7 @@ const ProfileProperties = () => {
       title="Profile properties"
     >
       <Form>
-        <Modal style={{ height: 'calc(100% - 40px)' }} targetRef={profilePropertiesModalRef}>
+        <Modal targetRef={profilePropertiesModalRef} fullHeight>
           <ModalHeader
             title="Profile properties"
             onCancel={handleCancelModal}
