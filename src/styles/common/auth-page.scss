@@ -55,7 +55,7 @@
   padding: 0 16px;
   border-radius: inherit;
   outline: none;
-  color: #fff;
+  color: var(--label-color-primary);
   
   &::placeholder {
     color: var(--label-color-tertiary);

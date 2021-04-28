@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Formik, Form, Field } from 'formik';
 import TextareaAutosize from 'react-textarea-autosize';
 import classNames from 'classnames';
@@ -7,8 +8,6 @@ import { SystemIconNames } from 'src/utils/const/icons';
 import Button from 'src/components/button';
 import IconButton from 'src/components/icon-button';
 import Text from 'src/components/typography/text';
-import Headline from 'src/components/typography/headline';
-import Icon from 'src/components/icon/icon';
 
 import './style.scss';
 
@@ -144,4 +143,11 @@ Reminder.propTypes = {
   onCancel: PropTypes.func.isRequired,
 };
 
-export default Reminder;
+export default memo(Reminder, (prevProps, nextProps) => {
+  const editingChanged = prevProps.editing !== nextProps.editing;
+  const textChanged = prevProps.text !== nextProps.text;
+  const completedChanged = prevProps.completed !== nextProps.completed;
+
+  const nothingChanged = !(editingChanged || textChanged || completedChanged);
+  return nothingChanged;
+});

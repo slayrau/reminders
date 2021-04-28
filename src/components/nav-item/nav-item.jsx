@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -35,4 +36,4 @@ NavItem.propTypes = {
   count: PropTypes.number.isRequired,
 };
 
-export default NavItem;
+export default memo(NavItem);
