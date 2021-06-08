@@ -2,6 +2,11 @@ A simple clone of a Reminders from Mac os, built using React.js and Firebase.
 
 https://reminders-9ce6d.web.app/
 
+credentials:
+- email: admin@gmail.com
+- password: 123123123
+or you can create your own account
+
 ## Features
 - Registration
 - Editing profile
